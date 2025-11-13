@@ -9,6 +9,6 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-  <App headerFavoriteCount={HEADER_FAVORITE_COUNT} foundedPlaces={FOUNDED_PLACES} hotelsData={hotelsData} />
+    <App headerFavoriteCount={HEADER_FAVORITE_COUNT} foundedPlaces={FOUNDED_PLACES} hotelsData={hotelsData} />
   </React.StrictMode>
 );
