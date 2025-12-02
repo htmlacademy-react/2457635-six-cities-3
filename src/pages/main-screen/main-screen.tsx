@@ -1,8 +1,8 @@
-import {MainScreenProps} from '../types.ts';
-import HotelCard from '../pages/hotel-card.tsx';
-import Header from './header.tsx';
+import { AppProps } from '../../types.ts';
+import Header from '../../components/header/header.tsx';
+import HotelCardList from '../../components/hotel-card/hotel-card-list.tsx';
 
-export default function MainScreen ({foundedPlaces, hotelsData}: MainScreenProps): JSX.Element {
+export default function MainScreen ({foundPlace, offers}: AppProps) {
   return (
     <div className="page page--gray page--main">
       <Header/>
@@ -49,7 +49,7 @@ export default function MainScreen ({foundedPlaces, hotelsData}: MainScreenProps
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{foundedPlaces} places to stay in Amsterdam</b>
+              <b className="places__found">{foundPlace} places to stay in Amsterdam</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-capti`on">Sort by</span>
                 <span className="places__sorting-type" tabIndex={0}>
@@ -65,9 +65,7 @@ export default function MainScreen ({foundedPlaces, hotelsData}: MainScreenProps
                   <li className="places__option" tabIndex={0}>Top rated first</li>
                 </ul>
               </form>
-              <div className="cities__places-list places__list tabs__content">
-                {hotelsData.map((hotel) => <HotelCard key={hotel.name} {...hotel} />)}
-              </div>
+              <HotelCardList offers={offers}/>
             </section>
             <div className="cities__right-section">
               <section className="cities__map map"></section>

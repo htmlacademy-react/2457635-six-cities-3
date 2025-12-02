@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './components/app';
-import {FOUNDED_PLACES, hotelsData} from './constants';
+import App from './components/app/app';
+import {FOUND_PLACES_COUNT} from './constants';
+import {OFFERS_DATA} from './mocks/offers';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -9,6 +10,6 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <App foundedPlaces = {FOUNDED_PLACES} hotelsData = {hotelsData}/>
+    <App foundPlace={FOUND_PLACES_COUNT} offers={OFFERS_DATA} />
   </React.StrictMode>
 );

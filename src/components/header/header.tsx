@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom';
-import { HEADER_FAVORITE_COUNT, AuthorizationStatus } from '../constants';
-import { authorization } from '../utils';
+import { HEADER_FAVORITE_COUNT, AuthorizationStatus } from '../../constants';
+import { authorization } from '../../utils';
 
 type Auth = {
   auth?: AuthorizationStatus;
 }
 
-export default function Header ({auth = AuthorizationStatus.NoAuth}: Auth): JSX.Element {
+export default function Header ({auth = AuthorizationStatus.NoAuth}: Auth) {
   return (
     <header className="header">
       <div className="container">

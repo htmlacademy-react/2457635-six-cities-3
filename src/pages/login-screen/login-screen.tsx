@@ -33,7 +33,7 @@ export default function LoginScreen () {
           </section>
           <section className="locations locations--login locations--current">
             <div className="locations__item">
-              <Link className="locations__item-link" to="#">
+              <Link className="locations__item-link" to='/'>
                 <span>Amsterdam</span>
               </Link>
             </div>
