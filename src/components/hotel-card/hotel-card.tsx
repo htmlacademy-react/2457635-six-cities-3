@@ -19,6 +19,11 @@ export default function HotelCard ({offer, setCurrentCard}: HotelCardProps) {
           setCurrentCard(offer.id);
         }
       }
+      onMouseLeave={
+        () => {
+          setCurrentCard('');
+        }
+      }
     >
       {premiumCard}
       <div className="cities__image-wrapper place-card__image-wrapper">

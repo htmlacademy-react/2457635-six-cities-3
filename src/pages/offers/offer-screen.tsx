@@ -7,6 +7,7 @@ import OfferHost from '../../components/offers/offer-host';
 import OfferReviewList from '../../components/offers/offer-review-list';
 import OfferFeautures from '../../components/offers/offer-feautures';
 import OfferOption from '../../components/offers/offer-option';
+import { useParams } from 'react-router-dom';
 
 type OfferScreenProps = {
   auth?: AuthorizationStatus;
@@ -14,8 +15,8 @@ type OfferScreenProps = {
 }
 
 export default function OfferScreen ({auth, offers} : OfferScreenProps) {
-  const id = window.location.pathname.slice(7);
-  const currentOffer = offers.find((offer) => offer.id === id) as Offer;
+  const id = useParams<{id: string}>();
+  const currentOffer = offers.find((offer) => offer.id === id.id) as Offer;
   const {images, isPremium, name, isBookmarks, rating, ratingValue, feautures, price, options, host, reviews} = currentOffer;
   const bookmarked = isBookmarks ? 'Is bookmarks' : 'To bookmarks';
 

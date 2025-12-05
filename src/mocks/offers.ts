@@ -18,6 +18,7 @@ export const OFFERS_DATA = [
     host: HOSTS[0],
     reviews: REVIEWS[0],
     town: 'Amsterdam',
+    coordinates: {latitude: 52.3909553943508, longitude: 4.85309666406198}
   },
   {
     images: [{id:0,image:'img/room.jpg'}, {id:1,image:'img/apartment-01.jpg'}, {id:2,image:'img/apartment-02.jpg'}],
@@ -35,6 +36,7 @@ export const OFFERS_DATA = [
     host: HOSTS[1],
     reviews: REVIEWS[1],
     town: 'Tokio',
+    coordinates: {latitude: 52.3609553943508, longitude: 4.85309666406198}
   },
   {
     images: [{id:0,image:'img/apartment-02.jpg'}, {id:1,image:'img/apartment-03.jpg'}, {id:2,image:'img/studio-01.jpg'}, {id:3,image:'img/apartment-01.jpg'}],
@@ -52,6 +54,7 @@ export const OFFERS_DATA = [
     host: HOSTS[2],
     reviews: REVIEWS[2],
     town: 'Geneva',
+    coordinates: {latitude: 52.3909553943508, longitude: 4.929309666406198}
   },
   {
     images: [{id:0,image:'img/apartment-02.jpg'}, {id:1,image:'img/apartment-03.jpg'}],
@@ -69,5 +72,6 @@ export const OFFERS_DATA = [
     host: HOSTS[3],
     reviews: REVIEWS[3],
     town: 'Italia',
+    coordinates: {latitude: 52.3809553943508, longitude: 4.939309666406198}
   },
 ];
