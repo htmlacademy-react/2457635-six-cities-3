@@ -1,8 +1,17 @@
-import { AppProps } from '../../types.ts';
+import { Offers, City} from '../../types.ts';
 import Header from '../../components/header/header.tsx';
 import HotelCardList from '../../components/hotel-card/hotel-card-list.tsx';
+import Map from '../../components/map/map.tsx';
+import { useState } from 'react';
 
-export default function MainScreen ({foundPlace, offers}: AppProps) {
+type MainScreenProps = {
+  foundPlace: number;
+  offers: Offers;
+  city: City;
+}
+
+export default function MainScreen ({foundPlace, offers, city}: MainScreenProps) {
+  const [currentCard, setCurrentCard] = useState('');
   return (
     <div className="page page--gray page--main">
       <Header/>
@@ -65,10 +74,10 @@ export default function MainScreen ({foundPlace, offers}: AppProps) {
                   <li className="places__option" tabIndex={0}>Top rated first</li>
                 </ul>
               </form>
-              <HotelCardList offers={offers}/>
+              <HotelCardList offers={offers} setCurrentCard={setCurrentCard}/>
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map"></section>
+              <Map city={city} offers={offers} selectedCard={currentCard}/>
             </div>
           </div>
         </div>

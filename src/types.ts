@@ -3,6 +3,22 @@ export type AppProps = {
   offers: Offers;
 };
 
+export type City = {
+  title: string;
+  lat: number;
+  lng: number;
+  zoom: number;
+}
+
+export type IconProperties = {
+  iconAnchor: IconAnchor;
+  iconSize: IconSize;
+}
+
+export type IconSize = L.PointExpression;
+
+export type IconAnchor = L.PointExpression;
+
 export type Result = string | number | null | JSX.Element;
 
 export type Host = {
@@ -38,6 +54,11 @@ export type Option = {
   option: string;
 }
 
+export type Coordinates = {
+  latitude: number;
+  longitude: number;
+}
+
 export type Offer = {
   images: Image[];
   imageSource: string;
@@ -54,6 +75,7 @@ export type Offer = {
   host: Host;
   reviews: Reviews;
   town: string;
+  coordinates: Coordinates;
 };
 
 export type Offers = Offer[];

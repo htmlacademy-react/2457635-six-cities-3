@@ -9,8 +9,9 @@ type PrivateOfferRouteProps = {
 
 export default function PrivateOfferRoute(props: PrivateOfferRouteProps) {
   const {offers, children} = props;
-  const { id } = useParams<{ id: string }>();
-  const currentOffer = offers.find((offer) => offer.id === id);
+  const id = useParams<{id: string}>();
+
+  const currentOffer = offers.find((offer) => offer.id === id.id);
 
   if (!currentOffer) {
     return <Navigate to={AppRoute.Error} />;
