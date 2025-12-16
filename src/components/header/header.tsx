@@ -7,6 +7,16 @@ type Auth = {
 }
 
 export default function Header ({auth = AuthorizationStatus.NoAuth}: Auth) {
+  const loginMarkup = auth === AuthorizationStatus.Auth ?
+    (
+      <a className="header__nav-link header__nav-link--profile" href="#">
+        <div className="header__avatar-wrapper user__avatar-wrapper"></div>
+        <span className="header__user-name user__name">{'Oliver.conner@gmail.com'}</span>
+        <span className="header__favorite-count">{HEADER_FAVORITE_COUNT}</span>
+      </a>
+    )
+    : '';
+
   return (
     <header className="header">
       <div className="container">
@@ -19,12 +29,7 @@ export default function Header ({auth = AuthorizationStatus.NoAuth}: Auth) {
           <nav className="header__nav">
             <ul className="header__nav-list">
               <li className="header__nav-item user">
-                <a className="header__nav-link header__nav-link--profile" href="#">
-                  <div className="header__avatar-wrapper user__avatar-wrapper">
-                  </div>
-                  <span className="header__user-name user__name">{authorization(auth, 'Oliver.conner@gmail.com', '')}</span>
-                  <span className="header__favorite-count">{authorization(auth, HEADER_FAVORITE_COUNT, null)}</span>
-                </a>
+                {loginMarkup}
               </li>
               <li className="header__nav-item">
                 <Link className="header__nav-link" to="#">

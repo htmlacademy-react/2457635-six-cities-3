@@ -1,8 +1,8 @@
 import Header from '../../components/header/header';
 import Map from '../../components/map/map';
-import {AuthorizationStatus } from '../../constants';
+import { AuthorizationStatus, CITIES } from '../../constants';
 import OfferFormReview from '../../components/offers/offer-form-review';
-import {Offer} from '../../types/models';
+import { City, Offer } from '../../types/models';
 import OfferImage from '../../components/offers/offer-image';
 import OfferHost from '../../components/offers/offer-host';
 import OfferReviewList from '../../components/offers/offer-review-list';
@@ -11,21 +11,28 @@ import OfferOption from '../../components/offers/offer-option';
 import { Link, useParams } from 'react-router-dom';
 import HotelCard from '../../components/hotel-card/hotel-card';
 import { useState } from 'react';
-import {useAppSelector} from '../../hooks';
-import { changeOffers } from '../../store/reduser';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { changeOffers, getAllOffers } from '../../store/reducer';
+import { changeTown } from '../../store/action';
+import '../../css/offer-screen-map.css';
 
 type OfferScreenProps = {
   auth?: AuthorizationStatus;
 }
 
 export default function OfferScreen ({auth} : OfferScreenProps) {
-  const id = useParams<{id: string}>();
-  const offers = useAppSelector((state) => changeOffers(state));
+  const { id } = useParams<{id: string}>();
+  const allOffers = useAppSelector(getAllOffers);
 
-  const currentOffer = offers.find((offer) => offer.id === id.id) as Offer;
+  const currentOffer = allOffers.find((offer) => offer.id === id) as Offer;
+  const town = CITIES.find((city) => city.name === currentOffer.town) as City;
+  const dispatch = useAppDispatch();
+  dispatch(changeTown(town));
+
+  const offers = useAppSelector(changeOffers);
   const {images, isPremium, name, isBookmarks, rating, ratingValue, feautures, price, options, host, reviews} = currentOffer;
   const bookmarked = isBookmarks ? 'Is bookmarks' : 'To bookmarks';
-  const anotherOffers = offers.filter((offer) => offer.id !== id.id);
+  const anotherOffers = offers.filter((offer) => offer.id !== id);
 
   const [currentCard, setCurrentCard] = useState('');
 
@@ -82,7 +89,7 @@ export default function OfferScreen ({auth} : OfferScreenProps) {
               </section>
             </div>
           </div>
-          <section className='offer__map map'>
+          <section className='leaflet_offer__map map'>
             <Map offers={anotherOffers} selectedCard={currentCard} />
           </section>
         </section>
@@ -91,14 +98,25 @@ export default function OfferScreen ({auth} : OfferScreenProps) {
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <div className="near-places__list places__list">
               {anotherOffers.map((offer) => (
-                <article className="near-places__card place-card" key={offer.id}>
+                <article className="near-places__card place-card" key={offer.id}
+                  onMouseOver={
+                    () => {
+                      setCurrentCard(offer.id);
+                    }
+                  }
+                  onMouseLeave={
+                    () => {
+                      setCurrentCard('');
+                    }
+                  }
+                >
                   <div className="near-places__image-wrapper place-card__image-wrapper">
                     <Link to={{pathname: `/offer/${offer.id}`}} state={offer}>
                       <img className="place-card__image" src={offer.imageSource} width="260" height="200" alt="Place image"/>
                     </Link>
                   </div>
                   {offer.isPremium ? <div className="place-card__mark"><span>Premium</span></div> : ''}
-                  <HotelCard offer={offer} setCurrentCard={setCurrentCard} key={offer.id}/>
+                  <HotelCard offer={offer} key={offer.id}/>
                 </article>
               ))}
             </div>

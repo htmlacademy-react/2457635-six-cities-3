@@ -1,4 +1,4 @@
-import {Image} from '../../types/models';
+import { Image } from '../../types/models';
 
 type OfferImageProps = Image;
 

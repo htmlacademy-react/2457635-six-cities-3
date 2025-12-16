@@ -1,29 +1,17 @@
 import { Link } from 'react-router-dom';
-import {Offer} from '../../types/models.ts';
+import { Offer } from '../../types/models.ts';
 import classnames from 'classnames';
 
 type HotelCardProps = {
   offer: Offer;
-  setCurrentCard: (value: string) => void;
 }
 
-export default function HotelCard ({offer, setCurrentCard}: HotelCardProps) {
+export default function HotelCard ({offer}: HotelCardProps) {
   const {price, isBookmarks, rating, name, placeType} = offer;
   const bookmarked = isBookmarks ? 'Is bookmarks' : 'To bookmarks';
 
   return (
-    <div className="place-card__info"
-      onMouseOver={
-        () => {
-          setCurrentCard(offer.id);
-        }
-      }
-      onMouseLeave={
-        () => {
-          setCurrentCard('');
-        }
-      }
-    >
+    <div className="place-card__info">
       <div className="place-card__price-wrapper">
         <div className="place-card__price">
           <b className="place-card__price-value">&euro;{price}</b>
