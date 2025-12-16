@@ -1,4 +1,4 @@
-import {Option} from '../../types';
+import {Option} from '../../types/models';
 
 type OfferOptionProps = Option;
 

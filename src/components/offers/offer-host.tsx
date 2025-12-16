@@ -1,4 +1,4 @@
-import { Host } from '../../types';
+import { Host } from '../../types/models';
 
 type OfferHostProps = {
   host: Host;

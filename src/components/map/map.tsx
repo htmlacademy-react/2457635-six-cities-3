@@ -1,9 +1,11 @@
 import {useEffect, useRef } from 'react';
-import { City, Offers, IconProperties} from '../../types';
+import {IconProperties, Offers} from '../../types/models';
 import useMap from '../../hooks/useMap';
 import L from 'leaflet';
 import PinActive from'/img/pin-active.svg';
 import Pin from '/img/pin.svg';
+import { useAppSelector } from '../../hooks';
+import { getCity } from '../../store/reduser';
 
 const ICON_PROPERTIES: IconProperties = {
   iconAnchor: [20, 40],
@@ -11,16 +13,15 @@ const ICON_PROPERTIES: IconProperties = {
 };
 
 type MapProps = {
-  offers: Offers;
-  city: City;
   selectedCard?: string;
+  offers: Offers;
 }
 
-export default function Map ({city, offers, selectedCard}: MapProps) {
+export default function Map ({selectedCard, offers}: MapProps) {
   const mapRef = useRef(null);
-  const map = useMap({mapRef, city});
-
+  const map = useMap({mapRef});
   const markersRef = useRef<L.Marker[]>([]);
+  const city = useAppSelector((state) => getCity(state));
 
   const defaultCustomIcon = L.icon({
     iconUrl: Pin,
@@ -39,6 +40,7 @@ export default function Map ({city, offers, selectedCard}: MapProps) {
       markersRef.current.forEach((marker) => marker.remove());
       markersRef.current = [];
 
+      map.setView({lat: city.lat, lng: city.lng}, 12);
       offers.forEach((offer) => {
         const offerMarker = L.marker({
           lat: offer.coordinates.latitude,
@@ -50,7 +52,8 @@ export default function Map ({city, offers, selectedCard}: MapProps) {
         markersRef.current.push(offerMarker);
       });
     }
-  }, [currentCustomIcon, defaultCustomIcon, map, offers, selectedCard]);
+
+  }, [city.lat, city.lng, currentCustomIcon, defaultCustomIcon, map, offers, selectedCard]);
 
   return (
     <div

@@ -1,14 +1,15 @@
-import {Offers } from '../../types.ts';
 import FavoritesItem from './favorites-item.tsx';
 import Header from '../header/header.tsx';
 import { AuthorizationStatus } from '../../constants.ts';
+import { useAppSelector } from '../../hooks/index.ts';
+import { getAllOffers } from '../../store/reduser.ts';
 
 type FavoritesItemListProps = {
-  offers: Offers;
   auth: AuthorizationStatus;
 }
 
-export default function FavoritesItemList ({offers, auth}: FavoritesItemListProps) {
+export default function FavoritesItemList ({auth}: FavoritesItemListProps) {
+  const offers = useAppSelector((state) => getAllOffers(state));
   return (
     <div className="page">
       <Header auth={auth}/>

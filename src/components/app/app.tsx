@@ -3,26 +3,18 @@ import LoginScreen from '../../pages/login-screen/login-screen.tsx';
 import OfferScreen from '../../pages/offers/offer-screen.tsx';
 import FavoritesItemList from '../favorites/favorites-item-list.tsx';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen.tsx';
-import {City, Offers} from '../../types.ts';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../constants.ts';
 import PrivateRoute from '../private-route/private-route.tsx';
-import MainEmptyScreen from '../../pages/main-screen/main-empty-screen.tsx';
 import PrivateOfferRoute from '../private-route/private-offer-route.tsx';
 
-type AppProps = {
-  foundPlace: number;
-  offers: Offers;
-  city: City;
-}
-
-export default function App({foundPlace, offers, city}: AppProps) {
+export default function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route
           path={AppRoute.Main}
-          element={offers.length ? <MainScreen foundPlace={foundPlace} offers={offers} city={city}/> : <MainEmptyScreen/>}
+          element={<MainScreen/>}
         />
         <Route
           path={AppRoute.Login}
@@ -32,17 +24,17 @@ export default function App({foundPlace, offers, city}: AppProps) {
           path={AppRoute.Favorites}
           element={
             <PrivateRoute
-              authorizationStatus={AuthorizationStatus.NoAuth}
+              authorizationStatus={AuthorizationStatus.Auth}
             >
-              <FavoritesItemList auth={AuthorizationStatus.NoAuth} offers={offers}/>
+              <FavoritesItemList auth={AuthorizationStatus.Auth}/>
             </PrivateRoute>
           }
         />
         <Route
           path={AppRoute.Offer}
           element={
-            <PrivateOfferRoute offers={offers}>
-              <OfferScreen auth={AuthorizationStatus.Auth} offers={offers} city={city}/>
+            <PrivateOfferRoute>
+              <OfferScreen auth={AuthorizationStatus.Auth}/>
             </PrivateOfferRoute>
           }
         />

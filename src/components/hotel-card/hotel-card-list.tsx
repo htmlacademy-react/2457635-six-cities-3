@@ -1,13 +1,14 @@
 import HotelCard from './hotel-card.tsx';
-import {Offers} from '../../types.ts';
 import { Link } from 'react-router-dom';
+import { useAppSelector } from '../../hooks/index.ts';
+import { changeOffers } from '../../store/reduser.ts';
 
 type HotelCardListProps = {
-  offers: Offers;
   setCurrentCard: (value: string) => void;
 };
 
-export default function HotelCardList({offers, setCurrentCard}: HotelCardListProps) {
+export default function HotelCardList({setCurrentCard}: HotelCardListProps) {
+  const offers = useAppSelector((state) => changeOffers(state));
 
   return (
     <div className="cities__places-list places__list tabs__content">
