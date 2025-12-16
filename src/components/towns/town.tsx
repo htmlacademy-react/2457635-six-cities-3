@@ -2,7 +2,7 @@ import classnames from 'classnames';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { changeTown } from '../../store/action';
 import { City } from '../../types/models';
-import { getCityName } from '../../store/reduser';
+import { getCityName } from '../../store/reducer';
 
 type TownProps = {
   town: City;
@@ -10,7 +10,7 @@ type TownProps = {
 
 export default function Town({town}: TownProps) {
   const dispatch = useAppDispatch();
-  const city = useAppSelector((state) => getCityName(state));
+  const city = useAppSelector(getCityName);
   const handleClick = () => {
     dispatch(changeTown(town));
   };
