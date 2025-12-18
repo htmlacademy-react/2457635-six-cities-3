@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { requireAuthorization } from '../../action';
 import { AuthorizationStatus } from '../../../constants';
+import { requireAuthorization } from './auth-action';
 
 export const authSlice = createSlice({
   name: 'auth',

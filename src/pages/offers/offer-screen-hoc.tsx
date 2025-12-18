@@ -2,9 +2,9 @@ import { ComponentType, useEffect, useState } from 'react' ;
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { getDataCurrentOffer, getReviews } from '../../store/api-actions';
 import { useParams } from 'react-router-dom';
-import { changeTown } from '../../store/action';
 import { CurrentOffer, Reviews } from '../../types/models';
 import { getCurrentOffer, getReviewsData } from '../../store/slices/offers-slice/offers-reducer';
+import { changeTown } from '../../store/slices/town-slice/town-action';
 
 type OfferScreenProps = {
   id?: string;

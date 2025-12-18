@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { CITIES } from '../../../constants';
-import { changeTown } from '../../action';
+import { changeTown } from './town-action';
 
 export const townsSlice = createSlice({
   name: 'towns',

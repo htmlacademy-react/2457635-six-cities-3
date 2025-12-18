@@ -1,8 +1,8 @@
 import classnames from 'classnames';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { setSorting } from '../../store/action';
 import { SortTypes } from '../../types/models';
 import { getCurrentSort } from '../../store/slices/sorting-slice/sorting-reducer';
+import { setSorting } from '../../store/slices/sorting-slice/sorting-action';
 
 type SortingTypesProps = {
   sort: SortTypes;

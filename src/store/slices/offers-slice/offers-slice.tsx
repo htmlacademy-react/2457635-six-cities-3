@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { loadData, setDataLoadingStatus, setCurrentOffer, setReviews } from '../../action';
 import { CurrentOffer, Offers, Reviews } from '../../../types/models';
+import { loadData, setCurrentOffer, setDataLoadingStatus, setReviews } from './offers-action';
 
 
 export const offersSlice = createSlice({
@@ -8,8 +8,8 @@ export const offersSlice = createSlice({
   initialState: {
     offers: [] as Offers,
     isOffersLoaded: false,
-    currentOffer: null as unknown as CurrentOffer,
-    reviews: [] as Reviews,
+    currentOffer: {} as CurrentOffer,
+    reviews: null as unknown as Reviews,
   },
   reducers: {},
   extraReducers: (builder) => {

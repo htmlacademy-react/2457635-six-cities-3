@@ -1,20 +1,40 @@
 import { Link } from 'react-router-dom';
-import { HEADER_FAVORITE_COUNT, AuthorizationStatus } from '../../constants';
-import { authorization } from '../../utils';
-import { useAppSelector } from '../../hooks';
+import { AuthorizationStatus } from '../../constants';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { getCurrentAuth } from '../../store/slices/auth-slice/auth-reducer';
+import { getUserData } from '../../store/slices/user-slice/user-reducer';
+import { favoriteOffers } from '../../store/slices/offers-slice/offers-reducer';
+import { logoutAction } from '../../store/api-actions';
 
 export default function Header () {
+  const dispatch = useAppDispatch();
   const loggedStatus = useAppSelector(getCurrentAuth);
+  const user = useAppSelector(getUserData);
+  const currentFavoriteOffers = useAppSelector(favoriteOffers);
+  const handleClick = () => {
+    dispatch(logoutAction());
+  };
   const loginMarkup = loggedStatus === AuthorizationStatus.Auth ?
     (
-      <a className="header__nav-link header__nav-link--profile" href="#">
-        <div className="header__avatar-wrapper user__avatar-wrapper"></div>
-        <span className="header__user-name user__name">{'Oliver.conner@gmail.com'}</span>
-        <span className="header__favorite-count">{HEADER_FAVORITE_COUNT}</span>
-      </a>
+      <Link className="header__nav-link header__nav-link--profile" to={'/favorites'}>
+        <div className="header__avatar-wrapper user__avatar-wrapper">
+          <img src={user.avatarUrl}></img>
+        </div>
+        <span className="header__user-name user__name">{user.email}</span>
+        <span className="header__favorite-count">{currentFavoriteOffers.length}</span>
+      </Link>
     )
     : '';
+
+  const signMarkup = loggedStatus === AuthorizationStatus.Auth ? (
+    <Link className="header__nav-link" to="/login" onClick={handleClick}>
+      <span className="header__signout">{'Sign out'}</span>
+    </Link>
+  ) : (
+    <Link className="header__nav-link" to="/login">
+      <span className="header__signin">{'Sign in'}</span>
+    </Link>
+  );
 
   return (
     <header className="header">
@@ -31,9 +51,7 @@ export default function Header () {
                 {loginMarkup}
               </li>
               <li className="header__nav-item">
-                <Link className="header__nav-link" to="/login">
-                  <span className="header__signout">{authorization(loggedStatus, 'Sign out', 'Sign in')}</span>
-                </Link>
+                {signMarkup}
               </li>
             </ul>
           </nav>

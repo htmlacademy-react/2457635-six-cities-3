@@ -86,6 +86,9 @@ export type CommonSlice = {
   error: {
     error: ErrorSlice;
   };
+  user: {
+    user: UserData;
+  };
 }
 
 export type ErrorSlice = string | null;

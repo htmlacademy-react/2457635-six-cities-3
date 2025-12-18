@@ -1,13 +1,4 @@
-import { AuthorizationStatus } from './constants';
-import { AuthStatus, Offer, Offers } from './types/models';
-
-export const authorization = (auth: AuthStatus, trueResult: string, falseResult: string) => {
-  if (auth === AuthorizationStatus.Auth) {
-    return trueResult;
-  }
-
-  return falseResult;
-};
+import { Offer, Offers } from './types/models';
 
 export const getCurrentDate = (convertData: Date) => `${convertData.getFullYear()}-${convertData.getMonth() + 1}-${convertData.getDate()}`;
 
