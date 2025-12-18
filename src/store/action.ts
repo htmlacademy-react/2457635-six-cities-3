@@ -1,12 +1,22 @@
 import { createAction } from '@reduxjs/toolkit';
-import { City} from '../types/models';
+import { City, CurrentOffer, Offers, Reviews, SortTypes } from '../types/models';
+import { AuthorizationStatus } from '../constants';
 
-export const changeTown = createAction('/changeTown', (value: City) => ({
-  payload: value,
-}));
+export const changeTown = createAction<City>('/changeTown');
 
-export const offers = createAction('/offers');
+export const setSorting = createAction<SortTypes>('/sorting');
 
-export const setSorting = createAction('/sorting', (value: string) => ({
-  payload: value
-}));
+
+export const loadData = createAction<Offers>('data/loadData');
+
+export const requireAuthorization = createAction<AuthorizationStatus>('user/requireAuthorization');
+
+export const setError = createAction<string | null>('/setError');
+
+export const setDataLoadingStatus = createAction<boolean>('data/setDataLoadingStatus');
+
+export const setCurrentOfferId = createAction<string | undefined>('offer/id');
+
+export const setCurrentOffer = createAction<CurrentOffer>('offers/offer');
+
+export const setReviews = createAction<Reviews>('offers/reviews');

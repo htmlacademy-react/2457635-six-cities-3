@@ -1,14 +1,11 @@
 import { createSelector } from '@reduxjs/toolkit';
-import { City, Offers, CommonSlice } from '../types/models';
-import { sortingTypes} from '../utils';
+import { Offers, SortTypes } from '../types/models';
+import { sortingTypes } from '../utils';
+import { currentCityName } from './slices/town-slice/town-reducer';
+import { currentSort } from './slices/sorting-slice/sorting-reducer';
+import { allOffers } from './slices/offers-slice/offers-reducer';
 
-const currentCityName = (state: CommonSlice) => state.towns.currentCity.name;
-const allOffers = (state: CommonSlice) => state.offers.offers;
-const currentCity = (state: CommonSlice) => state.towns.currentCity;
-const currentSort = (state: CommonSlice) => state.sorting.sorting;
-
-export const getCityName = createSelector([currentCityName], (name: string) => name);
-export const changeOffers = createSelector([currentCityName, allOffers, currentSort], (name: string, offersData: Offers, sort: string) => {
+export const changeOffers = createSelector([currentCityName, allOffers, currentSort], (name: string, offersData: Offers, sort: SortTypes) => {
   const popularOffers = sortingTypes.popularOffers(offersData, name);
 
   switch (sort) {
@@ -24,7 +21,3 @@ export const changeOffers = createSelector([currentCityName, allOffers, currentS
       return popularOffers;
   }
 });
-export const getCity = createSelector([currentCity], (city: City) => city);
-export const getAllOffers = createSelector([allOffers], (allCurrentOffers: Offers) => allCurrentOffers);
-export const favoriteOffers = createSelector([allOffers], (offersData: Offers) => offersData.filter((offer) => offer.isBookmarks));
-export const getCurrentSort = createSelector([currentSort], (sort: string) => sort);

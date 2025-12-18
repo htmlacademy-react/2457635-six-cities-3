@@ -1,10 +1,11 @@
 import classnames from 'classnames';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { setSorting } from '../../store/action';
-import { getCurrentSort } from '../../store/reducer';
+import { SortTypes } from '../../types/models';
+import { getCurrentSort } from '../../store/slices/sorting-slice/sorting-reducer';
 
 type SortingTypesProps = {
-  sort: string;
+  sort: SortTypes;
 }
 
 export default function SortingTypes({sort}: SortingTypesProps) {

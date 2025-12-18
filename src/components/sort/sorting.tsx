@@ -1,9 +1,9 @@
 import classnames from 'classnames';
 import { SORT_TYPES } from '../../constants';
 import { useAppSelector } from '../../hooks';
-import { getCurrentSort } from '../../store/reducer';
 import SortingTypes from './sort-types';
 import { useState } from 'react';
+import { getCurrentSort } from '../../store/slices/sorting-slice/sorting-reducer';
 
 export default function Sorting() {
   const currentSort = useAppSelector(getCurrentSort);

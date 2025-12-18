@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { SORT_TYPES } from '../constants';
-import { setSorting } from './action';
+import { SORT_TYPES } from '../../../constants';
+import { setSorting } from '../../action';
 
 export const sortingSlice = createSlice({
   name: 'sorting',

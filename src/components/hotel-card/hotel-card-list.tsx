@@ -29,7 +29,7 @@ export default function HotelCardList({setCurrentCard}: HotelCardListProps) {
 
             <div className='cities__image-wrapper place-card__image-wrapper'>
               <Link to={{pathname: `/offer/${offer.id}`}} state={offer}>
-                <img className="place-card__image" src={offer.imageSource} width="260" height="200" alt="Place image"/>
+                <img className="place-card__image" src={offer.previewImage} width="260" height="200" alt="Place image"/>
               </Link>
             </div>
             {offer.isPremium ? <div className="place-card__mark"><span>Premium</span></div> : ''}

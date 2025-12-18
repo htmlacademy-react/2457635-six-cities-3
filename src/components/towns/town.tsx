@@ -2,7 +2,7 @@ import classnames from 'classnames';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { changeTown } from '../../store/action';
 import { City } from '../../types/models';
-import { getCityName } from '../../store/reducer';
+import { getCityName } from '../../store/slices/town-slice/town-reducer';
 
 type TownProps = {
   town: City;

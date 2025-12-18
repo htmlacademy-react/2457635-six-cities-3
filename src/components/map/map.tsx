@@ -5,7 +5,7 @@ import L from 'leaflet';
 import PinActive from'/img/pin-active.svg';
 import Pin from '/img/pin.svg';
 import { useAppSelector } from '../../hooks';
-import { getCity } from '../../store/reducer';
+import { getCity } from '../../store/slices/town-slice/town-reducer';
 
 const ICON_PROPERTIES: IconProperties = {
   iconAnchor: [20, 40],
@@ -39,12 +39,11 @@ export default function Map ({selectedCard, offers}: MapProps) {
     if (map) {
       markersRef.current.forEach((marker) => marker.remove());
       markersRef.current = [];
-
-      map.setView({lat: city.lat, lng: city.lng}, 12);
+      map.setView({lat: city.location.latitude, lng: city.location.longitude}, 12);
       offers.forEach((offer) => {
         const offerMarker = L.marker({
-          lat: offer.coordinates.latitude,
-          lng: offer.coordinates.longitude
+          lat: offer.location.latitude,
+          lng: offer.location.longitude
         }, {
           icon: (offer.id === selectedCard) ? currentCustomIcon : defaultCustomIcon,
         }).addTo(map);
@@ -53,7 +52,7 @@ export default function Map ({selectedCard, offers}: MapProps) {
       });
     }
 
-  }, [city.lat, city.lng, currentCustomIcon, defaultCustomIcon, map, offers, selectedCard]);
+  }, [city.location.longitude, city.location.latitude, currentCustomIcon, defaultCustomIcon, map, offers, selectedCard]);
 
   return (
     <div

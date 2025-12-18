@@ -1,6 +1,6 @@
-import { Option } from '../../types/models';
-
-type OfferOptionProps = Option;
+type OfferOptionProps = {
+  option: string;
+};
 
 export default function OfferOption ({option}: OfferOptionProps) {
   return(

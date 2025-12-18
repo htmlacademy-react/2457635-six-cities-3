@@ -1,18 +1,23 @@
-import classnames from 'classnames';
-import { Feauture } from '../../types/models';
+type OfferFeauturesProps = {
+  type: string;
+  bedrooms: number;
+  maxAdults: number;
+};
 
-type OfferFeauturesProps = Feauture;
-
-export default function OfferFeautures ({feauture, type}: OfferFeauturesProps) {
+export default function OfferFeautures ({bedrooms, type, maxAdults}: OfferFeauturesProps) {
+  const upperCaseType = type.charAt(0).toUpperCase() + type.slice(1);
 
   return (
-    <li className={classnames('offer__feature', {
-      'offer__feature--entire' : type === 'dwelling',
-      'offer__feature--bedrooms' : type === 'bedrooms',
-      'offer__feature--adults' : type === 'adults',
-    })}
-    >
-      {feauture}
-    </li>
+    <ul className="offer__features">
+      <li className="offer__feature offer__feature--entire">
+        {upperCaseType}
+      </li>
+      <li className="offer__feature offer__feature--bedrooms">
+        {`${bedrooms} Bedrooms`}
+      </li>
+      <li className="offer__feature offer__feature--adults">
+        {`Max ${maxAdults} adults`}
+      </li>
+    </ul>
   );
 }

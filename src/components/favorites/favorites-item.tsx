@@ -6,14 +6,14 @@ type FavoritesItemProps = {
 }
 
 export default function FavoritesItem ({offer}: FavoritesItemProps) {
-  const {town, imageSource, price, rating, placeType, name} = offer;
+  const {city: {name}, previewImage, price, rating, type, title} = offer;
 
   return (
     <li className="favorites__locations-items">
       <div className="favorites__locations locations locations--current">
         <div className="locations__item">
           <a className="locations__item-link" href="#">
-            <span>{town}</span>
+            <span>{name}</span>
           </a>
         </div>
       </div>
@@ -21,7 +21,7 @@ export default function FavoritesItem ({offer}: FavoritesItemProps) {
         <article className="favorites__card place-card">
           <div className="favorites__image-wrapper place-card__image-wrapper">
             <Link to={{pathname: `/offer/${offer.id}`}} state={offer}>
-              <img className="place-card__image" src={imageSource} width="150" height="110" alt="Place image"/>
+              <img className="place-card__image" src={previewImage} width="150" height="110" alt="Place image"/>
             </Link>
           </div>
           <div className="favorites__card-info place-card__info">
@@ -44,9 +44,9 @@ export default function FavoritesItem ({offer}: FavoritesItemProps) {
               </div>
             </div>
             <h2 className="place-card__name">
-              <Link to={{pathname: `/offer/${offer.id}`}} state={offer}>{name}</Link>
+              <Link to={{pathname: `/offer/${offer.id}`}} state={offer}>{title}</Link>
             </h2>
-            <p className="place-card__type">{placeType}</p>
+            <p className="place-card__type">{type}</p>
           </div>
         </article>
       </div>

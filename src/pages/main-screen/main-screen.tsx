@@ -6,15 +6,10 @@ import { useState } from 'react';
 import TownList from '../../components/towns/town-list.tsx';
 import { useAppSelector } from '../../hooks/index.ts';
 import MainEmptyScreen from './main-empty-screen.tsx';
-import { changeOffers, getCityName } from '../../store/reducer.ts';
-import '../../css/main-screen-map.css';
-import { AuthorizationStatus } from '../../constants.ts';
+import { changeOffers } from '../../store/reducer.ts';
+import { getCityName } from '../../store/slices/town-slice/town-reducer.ts';
 
-type MainScreenProps = {
-  auth: AuthorizationStatus;
-}
-
-export default function MainScreen ({auth}: MainScreenProps) {
+export default function MainScreen () {
   const [currentCard, setCurrentCard] = useState('');
   const offers = useAppSelector(changeOffers);
   const cityName = useAppSelector(getCityName);
@@ -25,7 +20,7 @@ export default function MainScreen ({auth}: MainScreenProps) {
 
   return (
     <div className="page page--gray page--main">
-      <Header auth={auth}/>
+      <Header />
 
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
@@ -43,7 +38,7 @@ export default function MainScreen ({auth}: MainScreenProps) {
               <HotelCardList setCurrentCard={setCurrentCard}/>
             </section>
             <div className="cities__right-section">
-              <section className='leaflet__map map '>
+              <section className='map' style={{width: '100%'}}>
                 <Map offers={offers} selectedCard={currentCard}/>
               </section>
             </div>

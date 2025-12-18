@@ -1,6 +1,6 @@
-import { Image } from '../../types/models';
-
-type OfferImageProps = Image;
+type OfferImageProps = {
+  image: string;
+};
 
 export default function OfferImage ({image}: OfferImageProps) {
   return (
