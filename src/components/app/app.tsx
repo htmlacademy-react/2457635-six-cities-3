@@ -31,7 +31,6 @@ export default function App() {
     return <ErrorScreen />;
   }
 
-
   return (
     <HistoryRouter history={browserHistory}>
       <Routes>

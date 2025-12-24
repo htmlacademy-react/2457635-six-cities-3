@@ -4,7 +4,7 @@ import TownList from '../../components/towns/town-list';
 export default function MainEmptyScreen () {
   return (
     <div className="page page--gray page--main">
-      <Header/ >
+      <Header/>
 
       <main className="page__main page__main--index page__main--index-empty">
         <h1 className="visually-hidden">Cities</h1>

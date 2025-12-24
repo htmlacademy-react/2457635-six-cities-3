@@ -4,7 +4,7 @@ import Header from '../../components/header/header';
 export default function FavoritesEmptyScreen () {
   return (
     <div className="page page--favorites-empty">
-      <Header/ >
+      <Header/>
 
       <main className="page__main page__main--favorites page__main--favorites-empty">
         <div className="page__favorites-container container">
