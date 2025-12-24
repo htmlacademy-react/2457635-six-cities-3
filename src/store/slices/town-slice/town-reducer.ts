@@ -1,8 +1,10 @@
 import { createSelector } from '@reduxjs/toolkit';
-import { City, CommonSlice } from '../../../types/models';
+import { City } from '../../../types/models';
+import { State } from '../../../types/state';
+import { NameSpace } from '../../../constants';
 
-export const currentCityName = (state: CommonSlice) => state.towns.currentCity.name;
-const currentCity = (state: CommonSlice) => state.towns.currentCity;
+export const currentCityName = (state: State) => state[NameSpace.Town].currentCity.name;
+const currentCity = (state: State) => state[NameSpace.Town].currentCity;
 
 export const getCityName = createSelector([currentCityName], (name: string) => name);
 export const getCity = createSelector([currentCity], (city: City) => city);

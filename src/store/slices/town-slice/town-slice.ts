@@ -1,17 +1,17 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { CITIES } from '../../../constants';
-import { changeTown } from './town-action';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { CITIES, NameSpace } from '../../../constants';
+import { City } from '../../../types/models';
 
 export const townsSlice = createSlice({
-  name: 'towns',
+  name: NameSpace.Town,
   initialState: {
     currentCity: CITIES[1],
   },
-  reducers: {},
-  extraReducers: (builder) => {
-    builder
-      .addCase(changeTown, (state, action) => {
-        state.currentCity = action.payload;
-      });
-  }
+  reducers: {
+    changeTown: (state, action: PayloadAction<City>) => {
+      state.currentCity = action.payload;
+    }
+  },
 });
+
+export const {changeTown} = townsSlice.actions;

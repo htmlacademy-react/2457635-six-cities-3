@@ -81,3 +81,15 @@ export enum ApiRoute {
 }
 
 export const TIMEOUT_SHOW_ERROR = 2000;
+
+export enum NameSpace {
+  Auth = 'AUTH',
+  Error = 'ERROR',
+  Offers = 'OFFERS',
+  Sorting = 'SORTING',
+  Town = 'TOWN',
+  User = 'USER',
+  Review = 'REVIEW',
+  CurrentOffer = 'CURRENT_OFFER',
+  CurrentCard = 'CURRENT_CARD',
+}

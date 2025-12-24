@@ -1,33 +1,30 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { CurrentOffer, Offers, Reviews } from '../../../types/models';
-import { addUserReview, loadData, setCurrentOffer, setDataLoadingStatus, setReviews } from './offers-action';
+import { Offers } from '../../../types/models';
+import { fetchOfferAction } from '../../api-actions';
+import { NameSpace } from '../../../constants';
 
 
 export const offersSlice = createSlice({
-  name: 'offers',
+  name: NameSpace.Offers,
   initialState: {
     offers: [] as Offers,
     isOffersLoaded: false,
-    currentOffer: {} as CurrentOffer,
-    reviews: null as unknown as Reviews,
+    hasError: false,
   },
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(loadData, (state, action) => {
+      .addCase(fetchOfferAction.pending, (state) => {
+        state.isOffersLoaded = true;
+        state.hasError = false;
+      })
+      .addCase(fetchOfferAction.fulfilled, (state, action) => {
         state.offers = action.payload;
+        state.isOffersLoaded = false;
       })
-      .addCase(setDataLoadingStatus, (state, action) => {
-        state.isOffersLoaded = action.payload;
-      })
-      .addCase(setCurrentOffer, (state, action) => {
-        state.currentOffer = action.payload;
-      })
-      .addCase(setReviews, (state, action) => {
-        state.reviews = action.payload;
-      })
-      .addCase(addUserReview, (state, action) => {
-        state.reviews.push(action.payload);
+      .addCase(fetchOfferAction.rejected, (state) => {
+        state.isOffersLoaded = false;
+        state.hasError = true;
       });
   },
 });

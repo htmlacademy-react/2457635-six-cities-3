@@ -1,10 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { ErrorSlice } from '../../../types/models';
-
 import { setError } from './error-action';
+import { NameSpace } from '../../../constants';
 
 export const errorSlice = createSlice({
-  name: 'error',
+  name: NameSpace.Error,
   initialState: {
     error: null as ErrorSlice,
   },

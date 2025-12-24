@@ -1,27 +1,26 @@
 import { useEffect, useRef } from 'react';
-import { IconProperties, Offers } from '../../types/models';
+import { IconProperties } from '../../types/models';
 import useMap from '../../hooks/useMap';
 import L from 'leaflet';
 import PinActive from'/img/pin-active.svg';
 import Pin from '/img/pin.svg';
 import { useAppSelector } from '../../hooks';
 import { getCity } from '../../store/slices/town-slice/town-reducer';
+import { changeOffers } from '../../store/reducer';
+import { getCurrentCardId } from '../../store/slices/current-card-slice/current-card-reducer';
 
 const ICON_PROPERTIES: IconProperties = {
   iconAnchor: [20, 40],
   iconSize: [40, 40],
 };
 
-type MapProps = {
-  selectedCard?: string;
-  offers: Offers;
-}
-
-export default function Map ({selectedCard, offers}: MapProps) {
+export default function Map () {
   const mapRef = useRef(null);
   const map = useMap({mapRef});
   const markersRef = useRef<L.Marker[]>([]);
   const city = useAppSelector(getCity);
+  const offers = useAppSelector(changeOffers);
+  const selectedCard = useAppSelector(getCurrentCardId);
 
   const defaultCustomIcon = L.icon({
     iconUrl: Pin,

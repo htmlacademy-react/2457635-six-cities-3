@@ -1,12 +1,13 @@
 import { Link } from 'react-router-dom';
 import { Offer } from '../../types/models.ts';
 import classnames from 'classnames';
+import { memo } from 'react';
 
 type HotelCardProps = {
   offer: Offer;
 }
 
-export default function HotelCard ({offer}: HotelCardProps) {
+function HotelCard ({offer}: HotelCardProps) {
   const {price, isFavorite, rating, title, type} = offer;
   const bookmarked = isFavorite ? 'Is bookmarks' : 'To bookmarks';
   const ratingValue = rating * 20;
@@ -38,3 +39,5 @@ export default function HotelCard ({offer}: HotelCardProps) {
     </div>
   );
 }
+
+export const HotelCardMemo = memo(HotelCard, (prevProps, nextProps) => prevProps.offer === nextProps.offer);

@@ -1,14 +1,12 @@
-import HotelCard from './hotel-card.tsx';
+import { HotelCardMemo } from './hotel-card.tsx';
 import { Link } from 'react-router-dom';
-import { useAppSelector } from '../../hooks/index.ts';
+import { useAppDispatch, useAppSelector } from '../../hooks/index.ts';
 import { changeOffers } from '../../store/reducer.ts';
+import { setCurrentCardId } from '../../store/slices/current-card-slice/current-card-reducer.ts';
 
-type HotelCardListProps = {
-  setCurrentCard: (value: string) => void;
-};
-
-export default function HotelCardList({setCurrentCard}: HotelCardListProps) {
+export default function HotelCardList() {
   const offers = useAppSelector(changeOffers);
+  const dispatch = useAppDispatch();
 
   return (
     <div className="cities__places-list places__list tabs__content">
@@ -17,12 +15,12 @@ export default function HotelCardList({setCurrentCard}: HotelCardListProps) {
           <article className='cities__card place-card' key={offer.id}
             onMouseOver={
               () => {
-                setCurrentCard(offer.id);
+                dispatch(setCurrentCardId(offer.id));
               }
             }
             onMouseLeave={
               () => {
-                setCurrentCard('');
+                dispatch(setCurrentCardId(''));
               }
             }
           >
@@ -33,7 +31,7 @@ export default function HotelCardList({setCurrentCard}: HotelCardListProps) {
               </Link>
             </div>
             {offer.isPremium ? <div className="place-card__mark"><span>Premium</span></div> : ''}
-            <HotelCard offer={offer} key={offer.id}/>
+            <HotelCardMemo offer={offer} key={offer.id}/>
           </article>
         )
       )}

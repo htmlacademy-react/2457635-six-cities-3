@@ -1,9 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { UserData } from '../../../types/models';
 import { dropUserData, setUserData } from './user-action';
+import { NameSpace } from '../../../constants';
 
 export const userSlice = createSlice({
-  name: 'user',
+  name: NameSpace.User,
   initialState: {
     user: {} as UserData,
   },

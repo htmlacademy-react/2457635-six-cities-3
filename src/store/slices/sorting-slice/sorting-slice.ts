@@ -1,17 +1,17 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { SORT_TYPES } from '../../../constants';
-import { setSorting } from './sorting-action';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { NameSpace, SORT_TYPES } from '../../../constants';
+import { SortTypes } from '../../../types/models';
 
 export const sortingSlice = createSlice({
-  name: 'sorting',
+  name: NameSpace.Sorting,
   initialState: {
     sorting: SORT_TYPES[0],
   },
-  reducers: {},
-  extraReducers: (builder) => {
-    builder
-      .addCase(setSorting, (state, action) => {
-        state.sorting = action.payload;
-      });
+  reducers: {
+    setSorting: (state, action: PayloadAction<SortTypes>) => {
+      state.sorting = action.payload;
+    }
   },
 });
+
+export const {setSorting} = sortingSlice.actions;

@@ -67,30 +67,6 @@ export type OffersSlice = {
 
 export type SortTypes = 'Popular' | 'Price: low to high' | 'Price: high to low' | 'Top rated first';
 
-export type CommonSlice = {
-  towns: {
-    currentCity: City;
-  };
-  offers: {
-    offers: Offers;
-    isOffersLoaded: boolean;
-    currentOffer: CurrentOffer;
-    reviews: Reviews;
-  };
-  sorting: {
-    sorting: SortTypes;
-  };
-  auth: {
-    authStatus: AuthStatus;
-  };
-  error: {
-    error: ErrorSlice;
-  };
-  user: {
-    user: UserData;
-  };
-}
-
 export type ErrorSlice = string | null;
 
 export type CurrentOfferId = string | undefined;

@@ -3,8 +3,9 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { getDataCurrentOffer, getReviews } from '../../store/api-actions';
 import { useParams } from 'react-router-dom';
 import { CurrentOffer, Reviews } from '../../types/models';
-import { getCurrentOffer, getReviewsData } from '../../store/slices/offers-slice/offers-reducer';
-import { changeTown } from '../../store/slices/town-slice/town-action';
+import { changeTown } from '../../store/slices/town-slice/town-slice';
+import { getReviewsData } from '../../store/slices/review-slice/review-reducer';
+import { getCurrentOffer } from '../../store/slices/current-offer/current-offer-reducer';
 
 type OfferScreenProps = {
   id?: string;
@@ -13,7 +14,7 @@ type OfferScreenProps = {
 }
 
 export const OfferScreenHOC = (Component: ComponentType<OfferScreenProps>) => {
-  const OfferScreenWrapper = (props: OfferScreenProps) => {
+  const OfferScreenWrapper = () => {
     const dispatch = useAppDispatch();
     const { id } = useParams<{id: string}>();
     const [loading, setLoading] = useState(true);
@@ -45,7 +46,7 @@ export const OfferScreenHOC = (Component: ComponentType<OfferScreenProps>) => {
       return;
     }
 
-    return <Component {...props} id={id} currentOffer={currentOffer} reviews={reviews}/>;
+    return <Component id={id} currentOffer={currentOffer} reviews={reviews}/>;
   };
 
   return OfferScreenWrapper;

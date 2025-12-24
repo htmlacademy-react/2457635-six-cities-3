@@ -1,16 +1,23 @@
 import { useState } from 'react';
 import { sendUserReview } from '../../store/api-actions';
 import { CurrentOfferId } from '../../types/models';
-import { useAppDispatch } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { getCurrentAuth } from '../../store/slices/auth-slice/auth-reducer';
+import { AuthorizationStatus } from '../../constants';
 
 type OfferFormReviewProps = {
   id: CurrentOfferId;
 }
 
 export default function OfferFormReview ({id}: OfferFormReviewProps) {
+  const loggedStatus = useAppSelector(getCurrentAuth);
   const [ratingReview, setRating] = useState('');
   const [text, setText] = useState('');
   const dispatch = useAppDispatch();
+
+  if (loggedStatus !== AuthorizationStatus.Auth) {
+    return '';
+  }
 
   const handleClick = () => {
     dispatch(sendUserReview({

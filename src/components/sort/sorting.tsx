@@ -1,7 +1,7 @@
 import classnames from 'classnames';
 import { SORT_TYPES } from '../../constants';
 import { useAppSelector } from '../../hooks';
-import SortingTypes from './sort-types';
+import { SortingTypesMemo } from './sort-types';
 import { useState } from 'react';
 import { getCurrentSort } from '../../store/slices/sorting-slice/sorting-reducer';
 
@@ -22,7 +22,7 @@ export default function Sorting() {
         </svg>
       </span>
       <ul className={classnames('places__options places__options--custom', {'places__options--opened': isOpened})}>
-        {SORT_TYPES.map((sorting) => <SortingTypes sort={sorting} key={sorting}/>)}
+        {SORT_TYPES.map((sorting) => <SortingTypesMemo sort={sorting} key={sorting}/>)}
       </ul>
     </form>
   );
