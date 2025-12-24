@@ -1,4 +1,3 @@
-import { configureStore } from '@reduxjs/toolkit';
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { offersSlice } from './slices/offers-slice/offers-slice';
 import { townsSlice } from './slices/town-slice/town-slice';
@@ -11,7 +10,7 @@ import { redirect } from './middlewares/redirect';
 import { NameSpace } from '../constants';
 import { reviewSlice } from './slices/review-slice/review-slice';
 import { currentOfferSlice } from './slices/current-offer/current-offer-slice';
-import { currentCardSlice } from './slices/current-card-slice/current-card-reducer';
+import { currentCardSlice } from './slices/current-card-slice/current-card-slice';
 
 const api = createAPI();
 

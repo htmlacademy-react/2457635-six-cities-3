@@ -7,5 +7,6 @@ export const allOffers = (state: State) => state[NameSpace.Offers].offers;
 const currentLoadingStatus = (state: State) => state[NameSpace.Offers].isOffersLoaded;
 
 export const getErrorStatus = (state: State) => state[NameSpace.Offers].hasError;
+export const getAllOffers = createSelector([allOffers], (allCurrentOffers: Offers) => allCurrentOffers);
 export const favoriteOffers = createSelector([allOffers], (offersData: Offers) => offersData.filter((offer) => offer.isFavorite));
 export const getCurrentLoadingStatus = createSelector([currentLoadingStatus], (loadingStatus: boolean) => loadingStatus);

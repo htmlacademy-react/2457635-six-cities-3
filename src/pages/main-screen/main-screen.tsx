@@ -24,7 +24,7 @@ export default function MainScreen () {
               <h2 className="visually-hidden">Places</h2>
               <Places />
               <Sorting />
-              <HotelCardList setCurrentCard={setCurrentCard}/>
+              <HotelCardList />
             </section>
             <div className="cities__right-section">
               <section className='map' style={{width: '100%'}}>
