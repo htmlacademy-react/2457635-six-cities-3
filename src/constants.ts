@@ -78,6 +78,7 @@ export enum ApiRoute {
   Offers = '/offers',
   Login = '/login',
   Logout = '/logout',
+  Favorite = '/favorite',
 }
 
 export const TIMEOUT_SHOW_ERROR = 2000;
@@ -92,4 +93,7 @@ export enum NameSpace {
   Review = 'REVIEW',
   CurrentOffer = 'CURRENT_OFFER',
   CurrentCard = 'CURRENT_CARD',
+  FavoriteOffers = 'FAVORITE_OFFERS',
 }
+
+export const RATING_MULTIPLIER = 20;

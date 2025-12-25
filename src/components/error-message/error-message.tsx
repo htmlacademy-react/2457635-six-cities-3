@@ -1,5 +1,5 @@
 import { useAppSelector } from '../../hooks';
-import '../../css/error-message.css';
+import './error-message.css';
 import { getCurrentError } from '../../store/slices/error-slice/error-reducer';
 
 export default function ErrorMessage() {

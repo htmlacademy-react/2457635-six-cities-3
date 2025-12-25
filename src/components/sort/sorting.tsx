@@ -1,4 +1,4 @@
-import classnames from 'classnames';
+import cn from 'classnames';
 import { SORT_TYPES } from '../../constants';
 import { useAppSelector } from '../../hooks';
 import { SortingTypesMemo } from './sort-types';
@@ -21,7 +21,7 @@ export default function Sorting() {
           <use xlinkHref="#icon-arrow-select"></use>
         </svg>
       </span>
-      <ul className={classnames('places__options places__options--custom', {'places__options--opened': isOpened})}>
+      <ul className={cn('places__options places__options--custom', {'places__options--opened': isOpened})}>
         {SORT_TYPES.map((sorting) => <SortingTypesMemo sort={sorting} key={sorting}/>)}
       </ul>
     </form>

@@ -10,7 +10,7 @@ export default function PrivateMainScreeRoute(props: PrivateMainScreenRouteProps
   const {children} = props;
   const offers = useAppSelector(changeOffers);
 
-  if (!offers) {
+  if (offers.length === 0) {
     return <MainEmptyScreen />;
   }
 

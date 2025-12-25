@@ -1,12 +1,25 @@
 import { Link } from 'react-router-dom';
 import { Offer } from '../../types/models';
+import { RATING_MULTIPLIER } from '../../constants';
+import { useAppDispatch } from '../../hooks';
+import { addFavoriteOffer } from '../../store/api-actions';
+import { replaceOffer } from '../../store/slices/offers-slice/offers-action';
+import { setFavoriteOffer } from '../../store/slices/favorite-offers-slice/favorites-offers-action';
 
 type FavoritesItemProps = {
   offer: Offer;
 }
 
 export default function FavoritesItem ({offer}: FavoritesItemProps) {
+  const dispatch = useAppDispatch();
   const {city: {name}, previewImage, price, rating, type, title} = offer;
+  const ratingValue = rating * RATING_MULTIPLIER;
+
+  const handleClick = () => {
+    dispatch(addFavoriteOffer(offer));
+    dispatch(replaceOffer(offer.id));
+    dispatch(setFavoriteOffer(offer));
+  };
 
   return (
     <li className="favorites__locations-items">
@@ -30,7 +43,7 @@ export default function FavoritesItem ({offer}: FavoritesItemProps) {
                 <b className="place-card__price-value">&euro;{price}</b>
                 <span className="place-card__price-text">&#47;&nbsp;night</span>
               </div>
-              <button className="place-card__bookmark-button place-card__bookmark-button--active button" type="button">
+              <button className="place-card__bookmark-button place-card__bookmark-button--active button" type="button" onClick={handleClick}>
                 <svg className="place-card__bookmark-icon" width="18" height="19">
                   <use xlinkHref="#icon-bookmark"></use>
                 </svg>
@@ -39,7 +52,7 @@ export default function FavoritesItem ({offer}: FavoritesItemProps) {
             </div>
             <div className="place-card__rating rating">
               <div className="place-card__stars rating__stars">
-                <span style={{width: `${rating}%`}}></span>
+                <span style={{width: `${ratingValue}%`}}></span>
                 <span className="visually-hidden">Rating</span>
               </div>
             </div>

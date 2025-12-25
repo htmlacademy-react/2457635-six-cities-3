@@ -1,7 +1,7 @@
 import { AxiosInstance } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AppDispatch, State } from '../types/state';
-import { AuthData, CurrentOffer, CurrentOfferId, Offers, Review, Reviews, SendReview, UserData } from '../types/models';
+import { AuthData, CurrentOffer, CurrentOfferId, Offer, Offers, Review, Reviews, SendReview, UserData } from '../types/models';
 import { ApiRoute, AppRoute, TIMEOUT_SHOW_ERROR } from '../constants';
 import { redirectToRoute } from './action';
 import { dropToken, saveToken } from '../services/token';
@@ -9,6 +9,7 @@ import { store } from '.';
 import { setError } from './slices/error-slice/error-action';
 import { addUserReview } from './slices/review-slice/review-action';
 import { dropUserData, setUserData } from './slices/user-slice/user-action';
+import { setFavoriteOffers } from './slices/favorite-offers-slice/favorites-offers-action';
 
 export const clearErrorAction = createAsyncThunk(
   'six-cities/clearError',
@@ -115,6 +116,38 @@ export const loginAction = createAsyncThunk<void, AuthData, {
     saveToken(data.token);
     dispatch(setUserData(data));
     dispatch(redirectToRoute(AppRoute.Main));
+  },
+);
+
+export const addFavoriteOffer = createAsyncThunk<CurrentOffer, Offer, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}
+>(
+  'favoriteOffers/add',
+  async ({id, isFavorite}, {extra: api, rejectWithValue}) => {
+    try {
+      const {data} = await api.post<CurrentOffer>(`/favorite/${id}/${Number(!isFavorite)}`);
+
+      return data;
+    } catch (error : unknown) {
+      return rejectWithValue(error || 'Не удалось добавить/удалить избранное');
+    }
+  },
+);
+
+export const getFavoriteOffers = createAsyncThunk<void, undefined, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}
+>(
+  'favoriteOffers/get',
+  async (_arg, {dispatch, extra: api}) => {
+    const {data} = await api.get<Offers>(ApiRoute.Favorite);
+
+    dispatch(setFavoriteOffers(data));
   },
 );
 

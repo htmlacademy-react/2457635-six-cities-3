@@ -16,3 +16,12 @@ export const sortingTypes = {
   priceHighToLowOffers: (offers: Offers) => offers.sort(sortingMethods.highToLowPriceSorting),
   topRatingOffers: (offers: Offers) => offers.sort(sortingMethods.highToLowRatingSorting),
 };
+
+export const replaceOffersArray = (offers: Offers, id: string) => {
+  const currentOfferIndex = offers.findIndex((offer) => offer.id === id);
+  offers[currentOfferIndex].isFavorite = !offers[currentOfferIndex].isFavorite;
+
+  return offers;
+};
+
+export const removeFavoriteOffer = (offers: Offers, currentOffer: Offer) => offers.filter((offer) => offer.id !== currentOffer.id);

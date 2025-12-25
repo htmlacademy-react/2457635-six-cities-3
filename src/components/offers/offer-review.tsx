@@ -1,3 +1,4 @@
+import { RATING_MULTIPLIER } from '../../constants';
 import { Review } from '../../types/models';
 import { getCurrentDate, getMonthAndYear } from '../../utils';
 
@@ -7,7 +8,7 @@ type OfferReviewProps = {
 
 export default function OfferReview ({currentReview}: OfferReviewProps) {
   const {user:{name, avatarUrl}, comment, date, rating} = currentReview;
-  const ratingValue = rating * 20;
+  const ratingValue = rating * RATING_MULTIPLIER;
   const convertData = new Date(date);
 
   return (

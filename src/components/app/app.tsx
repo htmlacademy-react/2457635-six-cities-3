@@ -1,6 +1,6 @@
 import MainScreen from '../../pages/main-screen/main-screen.tsx';
 import LoginScreen from '../../pages/login-screen/login-screen.tsx';
-import FavoritesItemList from '../favorites/favorites-item-list.tsx';
+// import FavoritesItemList from '../favorites/favorites-item-list.tsx';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen.tsx';
 import { Routes, Route } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../constants.ts';
@@ -10,25 +10,22 @@ import { useAppSelector } from '../../hooks/index.ts';
 import LoadingScreen from '../../pages/loading-screen/loading-screen.tsx';
 import { OfferScreenWithHOC } from '../../pages/offers/offer-screen.tsx';
 import { getCurrentAuth } from '../../store/slices/auth-slice/auth-reducer.ts';
-import { getCurrentLoadingStatus, getErrorStatus } from '../../store/slices/offers-slice/offers-reducer.ts';
+// import { getCurrentLoadingStatus, getErrorStatus } from '../../store/slices/offers-slice/offers-reducer.ts';
+import { getCurrentLoadingStatus } from '../../store/slices/offers-slice/offers-reducer.ts';
 import HistoryRouter from '../history-route/history-route.tsx';
 import browserHistory from '../../browser-history.ts';
-import ErrorScreen from '../../pages/error-screen/error-screen.tsx';
+// import ErrorScreen from '../../pages/error-screen/error-screen.tsx';
 import PrivateMainScreeRoute from '../private-route/private-main-screen-route.tsx';
+import { FavoritesItemListWithHOC } from '../favorites/favorites-item-list.tsx';
 
 export default function App() {
   const authorizationStatus = useAppSelector(getCurrentAuth);
   const isDataLoading = useAppSelector(getCurrentLoadingStatus);
-  const hasError = useAppSelector(getErrorStatus);
 
   if (authorizationStatus === AuthorizationStatus.Unknown || isDataLoading) {
     return (
       <LoadingScreen />
     );
-  }
-
-  if (hasError) {
-    return <ErrorScreen />;
   }
 
   return (
@@ -50,7 +47,7 @@ export default function App() {
           path={AppRoute.Favorites}
           element={
             <PrivateRoute>
-              <FavoritesItemList/>
+              <FavoritesItemListWithHOC/>
             </PrivateRoute>
           }
         />

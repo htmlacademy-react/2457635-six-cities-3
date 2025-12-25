@@ -2,6 +2,8 @@ import { createSlice } from '@reduxjs/toolkit';
 import { Offers } from '../../../types/models';
 import { fetchOfferAction } from '../../api-actions';
 import { NameSpace } from '../../../constants';
+import { replaceOffer } from './offers-action';
+import { replaceOffersArray } from '../../../utils';
 
 
 export const offersSlice = createSlice({
@@ -9,14 +11,12 @@ export const offersSlice = createSlice({
   initialState: {
     offers: [] as Offers,
     isOffersLoaded: false,
-    hasError: false,
   },
   reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(fetchOfferAction.pending, (state) => {
         state.isOffersLoaded = true;
-        state.hasError = false;
       })
       .addCase(fetchOfferAction.fulfilled, (state, action) => {
         state.offers = action.payload;
@@ -24,7 +24,9 @@ export const offersSlice = createSlice({
       })
       .addCase(fetchOfferAction.rejected, (state) => {
         state.isOffersLoaded = false;
-        state.hasError = true;
+      })
+      .addCase(replaceOffer, (state, action) => {
+        state.offers = replaceOffersArray(state.offers, action.payload);
       });
   },
 });

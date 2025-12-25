@@ -1,9 +1,10 @@
 import { createSelector } from '@reduxjs/toolkit';
-import { Offers, SortTypes } from '../types/models';
+import { CurrentOffer, Offers, SortTypes } from '../types/models';
 import { sortingTypes } from '../utils';
 import { currentCityName } from './slices/town-slice/town-reducer';
 import { currentSort } from './slices/sorting-slice/sorting-reducer';
 import { allOffers } from './slices/offers-slice/offers-reducer';
+import { currentOffer } from './slices/current-offer/current-offer-reducer';
 
 export const changeOffers = createSelector([currentCityName, allOffers, currentSort], (name: string, offersData: Offers, sort: SortTypes) => {
   const popularOffers = sortingTypes.popularOffers(offersData, name);
@@ -21,3 +22,5 @@ export const changeOffers = createSelector([currentCityName, allOffers, currentS
       return popularOffers;
   }
 });
+
+export const getOffer = createSelector([allOffers, currentOffer], (offers: Offers, offerCurrent: CurrentOffer) => offers.find((offer) => offer.id === offerCurrent.id));
