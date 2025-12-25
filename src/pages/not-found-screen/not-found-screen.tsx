@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import '../../css/no-found-screen.css';
+import './no-found-screen.css';
 import Image from '../../img/Murlok.png';
 
 export default function NotFoundScreen () {
