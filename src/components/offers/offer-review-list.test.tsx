@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { fakeReviews } from '../../test/mock';
 import OfferReviewList from './offer-review-list';
-
+import { TestIdMarkups } from '../../test/testid-markup';
 import '@testing-library/jest-dom';
 
 describe('Component: OfferReviewList', () => {

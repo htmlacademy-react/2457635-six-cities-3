@@ -4,7 +4,6 @@ import MainEmptyScreen from '../../pages/main-screen/main-empty-screen';
 import { MainPage } from '../../pages/main-screen/main-page';
 
 export const MainScreen = () => {
-  const {children} = props;
   const offers = useAppSelector(changeOffers);
 
   if (offers.length === 0) {
@@ -13,3 +12,4 @@ export const MainScreen = () => {
 
   return <MainPage/>;
 };
+
