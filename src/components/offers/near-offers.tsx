@@ -13,9 +13,9 @@ export default function NearOffers () {
   const anotherOffers = offers.filter((offer) => offer.id !== id);
 
   return(
-    <div className="near-places__list places__list">
+    <div className="near-places__list places__list" data-testid='near-offers-container'>
       {anotherOffers.map((offer) => (
-        <article className="near-places__card place-card" key={offer.id}
+        <article className="near-places__card place-card" key={offer.id} data-testid='near-offers-article'
           onMouseOver={
             () => {
               dispatch(setCurrentCardId(offer.id));

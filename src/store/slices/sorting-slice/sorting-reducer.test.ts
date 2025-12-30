@@ -1,4 +1,3 @@
-import { describe, expect, it } from 'vitest';
 import { NameSpace, SORT_TYPES } from '../../../constants';
 import { getCurrentSort } from './sorting-reducer';
 

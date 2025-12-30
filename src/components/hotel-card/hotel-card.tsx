@@ -11,7 +11,7 @@ type HotelCardProps = {
   offer: Offer;
 }
 
-function HotelCard ({offer}: HotelCardProps) {
+export function HotelCard ({offer}: HotelCardProps) {
   const {price, isFavorite, rating, title, type} = offer;
   const bookmarked = isFavorite ? 'Is bookmarks' : 'To bookmarks';
   const ratingValue = rating * RATING_MULTIPLIER;
@@ -38,7 +38,7 @@ function HotelCard ({offer}: HotelCardProps) {
   }
 
   return (
-    <div className="place-card__info">
+    <div className="place-card__info" data-testid='hotel-card-container'>
       <div className="place-card__price-wrapper">
         <div className="place-card__price">
           <b className="place-card__price-value">&euro;{price}</b>

@@ -9,10 +9,10 @@ export default function HotelCardList() {
   const dispatch = useAppDispatch();
 
   return (
-    <div className="cities__places-list places__list tabs__content">
+    <div className="cities__places-list places__list tabs__content" data-testid='hotel-card-list-container'>
       {offers.map((offer) =>
         (
-          <article className='cities__card place-card' key={offer.id}
+          <article className='cities__card place-card' key={offer.id} data-testid='hotel-card-list-article'
             onMouseOver={
               () => {
                 dispatch(setCurrentCardId(offer.id));

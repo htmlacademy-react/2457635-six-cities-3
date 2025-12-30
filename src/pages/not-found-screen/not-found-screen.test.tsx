@@ -1,19 +1,17 @@
-import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import NotFoundScreen from './not-found-screen';
-import { withHistory } from '../../mock-component';
+import { withHistory } from '../../test/mock-component';
+import { TestIdMarkups, altNotFoundScreenText, notFoundScreenText } from '../../test/testid-markup';
+import '@testing-library/jest-dom';
 
 describe('Pages: NotFoundScreen', () => {
-  it('should return correct', () => {
-    const notFoundScreenContainerTestId = 'not-found-container';
-    const expectedErrorText = '404 Error';
-    const expectedBackToMainText = 'Вернуться на главную';
+  it('should return NotFoundScreen', () => {
     const preparedComponent = withHistory(<NotFoundScreen />);
 
     render(preparedComponent);
-    const errorText = screen.getByText(expectedErrorText);
-    const backToMainText = screen.getByText(expectedBackToMainText);
-    const notFoundScreenContainer = screen.getByTestId(notFoundScreenContainerTestId);
+    const errorText = screen.getByText(altNotFoundScreenText);
+    const backToMainText = screen.getByText(notFoundScreenText);
+    const notFoundScreenContainer = screen.getByTestId(TestIdMarkups.NotFoundTestId);
 
     expect(errorText).toBeInTheDocument();
     expect(backToMainText).toBeInTheDocument();

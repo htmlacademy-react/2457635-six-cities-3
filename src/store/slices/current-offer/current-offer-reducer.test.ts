@@ -1,6 +1,5 @@
-import { describe, expect, it } from 'vitest';
 import { NameSpace } from '../../../constants';
-import { fakeCurrentOffer } from '../../../mock';
+import { fakeCurrentOffer } from '../../../test/mock';
 import { getCurrentOffer } from './current-offer-reducer';
 
 describe('Current offer reducer', () => {

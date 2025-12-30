@@ -1,8 +1,7 @@
-import { describe, expect, it } from 'vitest';
 import { currentOfferSlice } from './current-offer-slice';
 import { CurrentOffer } from '../../../types/models';
 import { getDataCurrentOffer } from '../../api-actions';
-import { fakeCurrentOffer } from '../../../mock';
+import { fakeCurrentOffer } from '../../../test/mock';
 import { setCurrentOfferFavorite } from './current-offer-action';
 
 describe('Current offer reducer', () => {

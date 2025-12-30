@@ -8,14 +8,14 @@ type FavoriteItemListProps = {
   offers: Offers;
 }
 
-function FavoritesItemList ({offers}: FavoriteItemListProps) {
+export function FavoritesItemList ({offers}: FavoriteItemListProps) {
 
   if (offers.length === 0) {
     return <FavoritesEmptyScreen />;
   }
 
   return (
-    <div className="page">
+    <div className="page" data-testid='favorites-item-list-container'>
       <Header/>
 
       <main className="page__main page__main--favorites">
@@ -37,5 +37,4 @@ function FavoritesItemList ({offers}: FavoriteItemListProps) {
   );
 }
 
-
-export const FavoritesItemListWithHOC = FavoriteItemListHOC(FavoritesItemList);
+export const FavoritesScreen = FavoriteItemListHOC(FavoritesItemList);

@@ -12,7 +12,7 @@ export default function LoginMarkup () {
 
   return loggedStatus === AuthorizationStatus.Auth ?
     (
-      <Link className="header__nav-link header__nav-link--profile" to={'/favorites'}>
+      <Link className="header__nav-link header__nav-link--profile" to={'/favorites'} data-testid='login-markup-container'>
         <div className="header__avatar-wrapper user__avatar-wrapper">
           <img src={user.avatarUrl}></img>
         </div>

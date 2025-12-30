@@ -1,4 +1,3 @@
-import { describe, expect, it } from 'vitest';
 import { CITIES, NameSpace } from '../../../constants';
 import { getCity, getCityName } from './town-reducer';
 

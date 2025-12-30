@@ -14,9 +14,8 @@ export default function Town({town}: TownProps) {
   const handleClick = () => dispatch(changeTown(town));
 
   return (
-    <li className="locations__item" onClick={handleClick}>
-      <a className={cn('locations__item-link', 'tabs__item', {'tabs__item--active': city === town.name})} href="#">
-        <span>{town.name}</span>
+    <li className="locations__item" onClick={handleClick} data-testid='town-container'>
+      <a className={cn('locations__item-link', 'tabs__item', {'tabs__item--active': city === town.name})} href="#" data-testid='href-container'>
       </a>
     </li>
   );

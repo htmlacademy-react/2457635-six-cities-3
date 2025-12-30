@@ -41,7 +41,7 @@ export default function OfferFavoriteButton () {
   }
 
   return (
-    <button className={cn('offer__bookmark-button', 'button', {'offer__bookmark-button--active': favorite})} onClick={handleClick} type="button">
+    <button className={cn('offer__bookmark-button', 'button', {'offer__bookmark-button--active': favorite})} onClick={handleClick} type="button" data-testid='offer-favorite-button-contaner'>
       <svg className="offer__bookmark-icon" width="31" height="33">
         <use xlinkHref="#icon-bookmark"></use>
       </svg>

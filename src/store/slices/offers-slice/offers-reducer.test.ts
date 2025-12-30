@@ -1,6 +1,5 @@
-import { describe, expect, it } from 'vitest';
 import { NameSpace } from '../../../constants';
-import { fakeOffers } from '../../../mock';
+import { fakeOffers } from '../../../test/mock';
 import { favoriteOffers, getAllOffers, getCurrentLoadingStatus } from './offers-reducer';
 import { Offers } from '../../../types/models';
 

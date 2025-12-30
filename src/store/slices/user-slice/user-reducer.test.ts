@@ -1,8 +1,7 @@
-import { describe, expect, it } from 'vitest';
 import { NameSpace } from '../../../constants';
 import { UserData } from '../../../types/models';
 import { getUserData } from './user-reducer';
-import { fakeUser } from '../../../mock';
+import { fakeUser } from '../../../test/mock';
 
 
 describe('User reducer', () => {

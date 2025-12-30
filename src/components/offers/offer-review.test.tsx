@@ -1,15 +1,15 @@
-import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import { fakeReview } from '../../mock';
+import { fakeReview } from '../../test/mock';
 import OfferReview from './offer-review';
+import { TestIdMarkups } from '../../test/testid-markup';
+import '@testing-library/jest-dom';
 
 describe('Component: OfferReviewList', () => {
-  it('should return correct', () => {
+  it('should render OfferReviewList', () => {
     const expectedReview = fakeReview();
-    const offerReviewContainerTestId = 'review-container';
 
     render(<OfferReview currentReview={expectedReview}/>);
-    const offerReviewContainer = screen.getByTestId(offerReviewContainerTestId);
+    const offerReviewContainer = screen.getByTestId(TestIdMarkups.ReviewTestId);
     const reviewName = screen.getByText(expectedReview.user.name);
     const reviewComment = screen.getByText(expectedReview.comment);
 

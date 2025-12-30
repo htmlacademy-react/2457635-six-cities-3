@@ -16,9 +16,9 @@ const ICON_PROPERTIES: IconProperties = {
 
 export default function Map () {
   const mapRef = useRef(null);
-  const map = useMap({mapRef});
-  const markersRef = useRef<L.Marker[]>([]);
   const city = useAppSelector(getCity);
+  const map = useMap({mapRef, city});
+  const markersRef = useRef<L.Marker[]>([]);
   const offers = useAppSelector(changeOffers);
   const selectedCard = useAppSelector(getCurrentCardId);
 

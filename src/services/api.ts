@@ -43,7 +43,7 @@ export const createAPI = (): AxiosInstance => {
       if (error.response && shouldDislpayError(error.response)) {
         const detailMessage = (error.response.data);
 
-        (toast as { warn: (message: string) => void }).warn(detailMessage.message);
+        toast.warn(detailMessage.message);
       }
 
       throw error;

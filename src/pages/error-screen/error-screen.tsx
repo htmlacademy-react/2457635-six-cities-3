@@ -7,7 +7,7 @@ export default function ErrorScreen(): JSX.Element {
   const dispatch = useAppDispatch();
 
   return (
-    <div className='outer_error_container'>
+    <div className='outer_error_container' data-testid='error-container'>
       <img className='error_image' src={Image}/>
       <p className="error__text">Не удалось загрузить предложения</p>
       <button

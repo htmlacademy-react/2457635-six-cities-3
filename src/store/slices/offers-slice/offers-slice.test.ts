@@ -1,8 +1,7 @@
-import { describe, it, expect } from 'vitest';
 import { Offers } from '../../../types/models';
 import { offersSlice } from './offers-slice';
 import { fetchOfferAction } from '../../api-actions';
-import { fakeOffers } from '../../../mock';
+import { fakeOffers } from '../../../test/mock';
 import { replaceOffer } from './offers-action';
 
 describe('Offers slice', () => {

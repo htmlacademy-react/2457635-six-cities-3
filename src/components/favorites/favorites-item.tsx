@@ -22,7 +22,7 @@ export default function FavoritesItem ({offer}: FavoritesItemProps) {
   };
 
   return (
-    <li className="favorites__locations-items">
+    <li className="favorites__locations-items" data-testid='favorites-item-container'>
       <div className="favorites__locations locations locations--current">
         <div className="locations__item">
           <a className="locations__item-link" href="#">
@@ -33,7 +33,7 @@ export default function FavoritesItem ({offer}: FavoritesItemProps) {
       <div className="favorites__places">
         <article className="favorites__card place-card">
           <div className="favorites__image-wrapper place-card__image-wrapper">
-            <Link to={{pathname: `/offer/${offer.id}`}} state={offer}>
+            <Link to={`/offer/${offer.id}`} state={offer}>
               <img className="place-card__image" src={previewImage} width="150" height="110" alt="Place image"/>
             </Link>
           </div>
@@ -57,7 +57,9 @@ export default function FavoritesItem ({offer}: FavoritesItemProps) {
               </div>
             </div>
             <h2 className="place-card__name">
-              <Link to={{pathname: `/offer/${offer.id}`}} state={offer}>{title}</Link>
+              <Link to={`/offer/${offer.id}`} state={offer}>
+                {title}
+              </Link>
             </h2>
             <p className="place-card__type">{type}</p>
           </div>

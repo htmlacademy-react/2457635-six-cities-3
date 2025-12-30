@@ -1,8 +1,7 @@
-import { describe, expect, it } from 'vitest';
 import { NameSpace } from '../../../constants';
 import { Offers } from '../../../types/models';
 import { getAllFavoriteOffers } from './favorite-offers-reducer';
-import { fakeOffers } from '../../../mock';
+import { fakeOffers } from '../../../test/mock';
 
 describe('Favorite offers reducer', () => {
   it('should return emty favorite offers', () => {

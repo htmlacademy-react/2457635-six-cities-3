@@ -1,8 +1,7 @@
-import { describe, it, expect } from 'vitest';
 import { reviewSlice } from './review-slice';
 import { Reviews } from '../../../types/models';
 import { getReviews } from '../../api-actions';
-import { fakeReview, fakeReviews } from '../../../mock';
+import { fakeReview, fakeReviews } from '../../../test/mock';
 import { addUserReview, setReviews } from './review-action';
 
 describe('Review slice', () => {

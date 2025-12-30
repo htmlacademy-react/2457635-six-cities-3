@@ -9,13 +9,13 @@ type SortingTypesProps = {
   sort: SortTypes;
 }
 
-function SortingTypes({sort}: SortingTypesProps) {
+export function SortingTypes({sort}: SortingTypesProps) {
   const dispatch = useAppDispatch();
   const currentSort = useAppSelector(getCurrentSort);
   const handleClick = () => dispatch(setSorting(sort));
 
   return (
-    <li className={cn('places__option', {'places__option--active' : currentSort === sort})} onClick={handleClick} tabIndex={0}>{sort}</li>
+    <li className={cn('places__option', {'places__option--active' : currentSort === sort})} onClick={handleClick} tabIndex={0} data-testid='sort-types-container'>{sort}</li>
   );
 }
 

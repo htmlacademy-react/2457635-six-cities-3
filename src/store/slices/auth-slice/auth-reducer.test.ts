@@ -1,4 +1,3 @@
-import { describe, expect, it } from 'vitest';
 import { AuthorizationStatus, NameSpace } from '../../../constants';
 import { AuthSlice } from '../../../types/models';
 import { getCurrentAuth } from './auth-reducer';

@@ -1,15 +1,15 @@
-import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import { fakeGoods } from '../../mock';
+import { fakeGoods } from '../../test/mock';
 import OfferOptionList from './offer-option-list';
+import { TestIdMarkups } from '../../test/testid-markup';
+import '@testing-library/jest-dom';
 
 describe('Component: OfferOptionList', () => {
-  it('should return correct', () => {
+  it('should render OfferOptionList', () => {
     const expectedOptions = fakeGoods;
-    const offerOptionListContainerTestId = 'option-list-container';
 
     render(<OfferOptionList goods={expectedOptions}/>);
-    const offerOptionListContainer = screen.getByTestId(offerOptionListContainerTestId);
+    const offerOptionListContainer = screen.getByTestId(TestIdMarkups.OptionListTestId);
 
     expect(offerOptionListContainer).toBeInTheDocument();
   });

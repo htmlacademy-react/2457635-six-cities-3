@@ -12,11 +12,11 @@ export default function SignMarkup () {
   };
 
   return loggedStatus === AuthorizationStatus.Auth ? (
-    <Link className="header__nav-link" to="/login" onClick={handleClick}>
+    <Link className="header__nav-link" to="/login" onClick={handleClick} data-testid='auth-markup-container'>
       <span className="header__signout">{'Sign out'}</span>
     </Link>
   ) : (
-    <Link className="header__nav-link" to="/login">
+    <Link className="header__nav-link" to="/login" data-testid='no-auth-markup-container'>
       <span className="header__signin">{'Sign in'}</span>
     </Link>
   );

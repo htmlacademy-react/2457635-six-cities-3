@@ -20,7 +20,7 @@ export default function LoginScreen () {
   };
 
   return (
-    <div className="page page--gray page--login">
+    <div className="page page--gray page--login" data-testid='login-container'>
       <header className="header">
         <div className="container">
           <div className="header__wrapper">
@@ -40,11 +40,11 @@ export default function LoginScreen () {
             <form className="login__form form" action="" method="post" onSubmit={handleSubmit}>
               <div className="login__input-wrapper form__input-wrapper">
                 <label className="visually-hidden">E-mail</label>
-                <input ref={loginRef} className="login__input form__input" type="email" name="email" placeholder="Email" required/>
+                <input ref={loginRef} className="login__input form__input" type="email" name="email" placeholder="Email" required data-testid='email-container'/>
               </div>
               <div className="login__input-wrapper form__input-wrapper">
                 <label className="visually-hidden">Password</label>
-                <input ref={passwordRef} className="login__input form__input" type="password" name="password" placeholder="Password" required/>
+                <input ref={passwordRef} className="login__input form__input" type="password" name="password" placeholder="Password" required data-testid='password-container'/>
               </div>
               <button className="login__submit form__submit button" type="submit">Sign in</button>
             </form>

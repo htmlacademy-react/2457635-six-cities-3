@@ -3,7 +3,7 @@ import TownList from '../../components/towns/town-list';
 
 export default function MainEmptyScreen () {
   return (
-    <div className="page page--gray page--main">
+    <div className="page page--gray page--main" data-testid='main-empty-container'>
       <Header/>
 
       <main className="page__main page__main--index page__main--index-empty">

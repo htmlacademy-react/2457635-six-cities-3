@@ -1,14 +1,14 @@
-import Sorting from '../../components/sort/sorting.tsx';
+import Sorting from '../../components/sorting/sorting.tsx';
 import HotelCardList from '../../components/hotel-card/hotel-card-list.tsx';
 import Map from '../../components/map/map.tsx';
 import TownList from '../../components/towns/town-list.tsx';
 import Header from '../../components/header/header.tsx';
 import Places from '../../components/places/places.tsx';
 
-export default function MainScreen () {
+export function MainPage () {
 
   return (
-    <div className="page page--gray page--main">
+    <div className="page page--gray page--main" data-testid='main-screen-container'>
       <Header/>
 
       <main className="page__main page__main--index">

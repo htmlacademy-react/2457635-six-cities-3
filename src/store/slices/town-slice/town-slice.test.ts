@@ -1,4 +1,3 @@
-import { describe, it, expect } from 'vitest';
 import { CITIES } from '../../../constants';
 import { changeTown, townsSlice } from './town-slice';
 

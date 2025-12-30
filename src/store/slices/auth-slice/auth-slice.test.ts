@@ -1,7 +1,6 @@
 import { AuthorizationStatus } from '../../../constants';
 import { checkAuthAction, loginAction, logoutAction } from '../../api-actions';
 import { authSlice } from './auth-slice';
-import { describe, expect, it } from 'vitest';
 
 describe('Auth slice', () => {
   it ('should return initial state with empty action', () => {

@@ -36,6 +36,7 @@ export default function OfferFormReview ({id}: OfferFormReviewProps) {
         setRating(ratingReview);
       }
     }
+    data-testid='form-review-container'
     >
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">

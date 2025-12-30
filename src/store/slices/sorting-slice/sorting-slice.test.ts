@@ -1,4 +1,3 @@
-import { describe, it, expect } from 'vitest';
 import { SORT_TYPES } from '../../../constants';
 import { setSorting, sortingSlice } from './sorting-slice';
 

@@ -1,7 +1,6 @@
-import { describe, expect, it } from 'vitest';
 import { Offer, Offers } from '../../../types/models';
 import { favoriteOffersSlice } from './favorite-offers-slice';
-import { fakeOffer, fakeOffers } from '../../../mock';
+import { fakeOffer, fakeOffers } from '../../../test/mock';
 import { setFavoriteOffer, setFavoriteOffers } from './favorites-offers-action';
 
 describe('Favorite offers slice', () => {

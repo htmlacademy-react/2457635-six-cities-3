@@ -13,7 +13,8 @@ export default function Sorting() {
   };
 
   return (
-    <form className="places__sorting" action="#" method="get" onClick={handleClick}>
+
+    <form className="places__sorting" action="#" method="get" onClick={handleClick} data-testid='sorting-container'>
       <span className="places__sorting-caption">Sort by</span>
       <span className="places__sorting-type" tabIndex={0}>
         {currentSort}
@@ -21,7 +22,7 @@ export default function Sorting() {
           <use xlinkHref="#icon-arrow-select"></use>
         </svg>
       </span>
-      <ul className={cn('places__options places__options--custom', {'places__options--opened': isOpened})}>
+      <ul className={cn('places__options places__options--custom', {'places__options--opened': isOpened})} data-testid='ul-container'>
         {SORT_TYPES.map((sorting) => <SortingTypesMemo sort={sorting} key={sorting}/>)}
       </ul>
     </form>
