@@ -5,7 +5,7 @@ import { store } from './store';
 import { checkAuthAction, fetchOfferAction, getUserData } from './store/api-actions';
 import { getToken } from './services/token';
 import App from './components/app/app';
-import ErrorMessage from './components/error-message/error-message';
+import {ToastContainer} from 'react-toastify';
 
 export const AppWithStore = () => {
   useEffect(() => {
@@ -19,7 +19,7 @@ export const AppWithStore = () => {
 
   return (
     <Provider store={store}>
-      <ErrorMessage />
+      <ToastContainer />
       <App />
     </Provider>
   );

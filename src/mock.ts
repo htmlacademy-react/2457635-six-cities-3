@@ -1,26 +1,109 @@
-export const HOSTS = [
-  {
-    avatar: 'img/avatar-angelina.jpg',
-    username: 'Angelina',
-    userStatus: 'Pro',
-    text: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
-  },
-  {
-    avatar: 'img/avatar-max.jpg',
-    username: 'Max',
-    userStatus: 'Pro',
-    text: ' It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
-  },
-  {
-    avatar: 'img/avatar-angelina.jpg',
-    username: 'Angelina',
-    userStatus: '',
-    text: 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using Content here, content here, making it look like readable English.',
-  },
-  {
-    avatar: 'img/avatar-max.jpg',
-    username: 'Max',
-    userStatus: '',
-    text: 'Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for lorem ipsum will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)',
-  },
-];
+import { Action, ThunkDispatch } from '@reduxjs/toolkit';
+import { datatype, name, address, lorem, image, internet } from 'faker';
+import { State } from './types/state';
+import { createAPI } from './services/api';
+
+export const cardId = datatype.uuid();
+
+export const fakeLocation = {
+  latitude: Number(address.latitude()),
+  longitude: Number(address.longitude()),
+  zoom: datatype.number(),
+};
+
+export const fakeCity = {
+  name: address.cityName(),
+  location: fakeLocation
+};
+
+export const fakeHost = {
+  name: name.firstName(),
+  avatarUrl: image.imageUrl(),
+  isPro: datatype.boolean(),
+};
+
+export const fakeDescription = datatype.string();
+
+export const fakeImages = Array.from({ length: 10 }, () => image.imageUrl());
+
+export const fakeGoods = Array.from({ length: 5 }, () => lorem.word());
+
+export const fakeCurrentOffer = {
+  id: datatype.uuid(),
+  title: name.title(),
+  type: name.jobType(),
+  price: datatype.number(),
+  city: fakeCity,
+  location: fakeLocation,
+  isFavorite: datatype.boolean(),
+  isPremium: datatype.boolean(),
+  rating: datatype.number(),
+  description: fakeDescription,
+  bedrooms: datatype.number(),
+  goods: fakeGoods,
+  host: fakeHost,
+  images: fakeImages,
+  maxAdults: datatype.number(),
+};
+
+export const fakeError = lorem.text();
+
+export const fakeOffer = () => ({
+  id: datatype.uuid(),
+  title: name.title(),
+  type: name.jobType(),
+  price: datatype.number(),
+  city: fakeCity,
+  location: fakeLocation,
+  isFavorite: datatype.boolean(),
+  isPremium: datatype.boolean(),
+  rating: datatype.number(),
+  previewImage: image.imageUrl(),
+});
+
+export const fakeOffers = Array.from({length: 10}, () => fakeOffer());
+
+export const fakeReview = () => ({
+  id: datatype.uuid(),
+  date: datatype.datetime().toISOString(),
+  user: fakeHost,
+  comment: lorem.paragraph(),
+  rating: datatype.number(),
+});
+
+export const fakeReviews = Array.from({length: 5}, () => fakeReview());
+
+export const fakeUser = {
+  name: name.firstName(),
+  avatarUrl: image.imageUrl(),
+  isPro: datatype.boolean(),
+  email: internet.email(),
+  token: datatype.uuid(),
+};
+
+export type AppThunkDispatch = ThunkDispatch<State, ReturnType<typeof createAPI>, Action>;
+
+export const extractActionsTypes = (actions: Action<string>[]) => actions.map(({ type }) => type);
+
+export const fakeUserLogin = {
+  login: internet.email(),
+  password: datatype.string(),
+};
+
+export const fakeServerAnswer = {
+  token: datatype.string(),
+};
+
+export const fakeCurrentOfferId = datatype.string();
+
+export const fakeUserReview = {
+  offerId: fakeCurrentOfferId,
+  comment: datatype.string(),
+  rating: datatype.number(),
+};
+
+export const fakeFeautures = {
+  bedrooms: datatype.number(),
+  type: datatype.string(),
+  maxAdults: datatype.number(),
+};

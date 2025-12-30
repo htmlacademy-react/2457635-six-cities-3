@@ -7,6 +7,6 @@ type ReviewProps = {
 
 export default function OfferReviewList ({reviews}: ReviewProps) {
   return (
-    <ul className="reviews__list">{reviews.map((currentReview) => <OfferReview currentReview={currentReview} key={currentReview.id}/>)}</ul>
+    <ul className="reviews__list" data-testid='review-list-container'>{reviews.map((currentReview) => <OfferReview currentReview={currentReview} key={currentReview.id}/>)}</ul>
   );
 }

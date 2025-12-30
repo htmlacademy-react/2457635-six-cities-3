@@ -4,7 +4,7 @@ type OfferOptionProps = {
 
 export default function OfferOption ({option}: OfferOptionProps) {
   return(
-    <li className="offer__inside-item">
+    <li className="offer__inside-item" data-testid='option-container'>
       {option}
     </li>
   );

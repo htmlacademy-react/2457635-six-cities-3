@@ -12,7 +12,7 @@ export default function OfferHost ({host, description}: UserHost) {
   const statusMarkup = isPro ? <span className="offer__user-status">Pro</span> : '';
 
   return (
-    <div className="offer__host">
+    <div className="offer__host" data-testid='host-container'>
       <h2 className="offer__host-title">Meet the host</h2>
       <div className="offer__host-user user">
         <div className="offer__avatar-wrapper offer__avatar-wrapper--pro user__avatar-wrapper">

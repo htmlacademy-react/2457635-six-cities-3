@@ -1,12 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { AuthorizationStatus, NameSpace } from '../../../constants';
 import { checkAuthAction, loginAction, logoutAction } from '../../api-actions';
+import { AuthSlice } from '../../../types/models';
+
+const initialState: AuthSlice = {
+  authStatus: AuthorizationStatus.Unknown,
+};
 
 export const authSlice = createSlice({
   name: NameSpace.Auth,
-  initialState: {
-    authStatus: AuthorizationStatus.Unknown,
-  },
+  initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder

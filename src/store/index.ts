@@ -4,7 +4,6 @@ import { townsSlice } from './slices/town-slice/town-slice';
 import { sortingSlice } from './slices/sorting-slice/sorting-slice';
 import { createAPI } from '../services/api';
 import { authSlice } from './slices/auth-slice/auth-slice';
-import { errorSlice } from './slices/error-slice/error-slice';
 import { userSlice } from './slices/user-slice/user-slice';
 import { redirect } from './middlewares/redirect';
 import { NameSpace } from '../constants';
@@ -20,7 +19,6 @@ export const rootReducer = combineReducers({
   [NameSpace.Town]: townsSlice.reducer,
   [NameSpace.Sorting]: sortingSlice.reducer,
   [NameSpace.Auth]: authSlice.reducer,
-  [NameSpace.Error]: errorSlice.reducer,
   [NameSpace.User]: userSlice.reducer,
   [NameSpace.Review]: reviewSlice.reducer,
   [NameSpace.CurrentOffer]: currentOfferSlice.reducer,

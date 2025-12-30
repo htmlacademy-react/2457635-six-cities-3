@@ -69,6 +69,10 @@ export type SortTypes = 'Popular' | 'Price: low to high' | 'Price: high to low' 
 
 export type ErrorSlice = string | null;
 
+export type AuthSlice = {
+  authStatus: AuthStatus;
+}
+
 export type CurrentOfferId = string | undefined;
 
 export type AuthStatus = 'UNKNOWN' | 'AUTH' | 'NO_AUTH';
