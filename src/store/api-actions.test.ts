@@ -13,7 +13,7 @@ import { redirectToRoute } from './action';
 import { dropUserData, setUserData } from './slices/user/actions';
 import * as tokenStorage from '../services/token';
 import { setFavoriteOffers } from './slices/favorite-offers/actions';
-import { addUserReview } from './slices/review/actions';
+import { addUserReview } from './slices/review/action';
 import { removeFavoriteOffers } from './slices/offers/actions';
 
 describe('Async actions', () => {

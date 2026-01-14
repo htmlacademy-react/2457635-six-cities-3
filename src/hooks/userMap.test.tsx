@@ -1,5 +1,6 @@
 import { renderHook } from '@testing-library/react';
-import useMap from './use-map';
+// import useMap from './use-map';
+import useMap from './useMap';
 import leaflet from 'leaflet';
 import { CITIES } from '../constants';
 

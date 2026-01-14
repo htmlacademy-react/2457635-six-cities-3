@@ -2,7 +2,8 @@ import { reviews } from './reviews';
 import { Reviews } from '../../../types/models';
 import { getReviews } from '../../api-actions';
 import { fakeReview, fakeReviews } from '../../../test/mock';
-import { addUserReview, setReviews } from './actions';
+// import { addUserReview, setReviews } from './actions';
+import { addUserReview, setReviews } from './action';
 
 describe('Review slice', () => {
   const state = {
