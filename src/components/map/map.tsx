@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { City, IconProperties, Offers } from '../../types/models';
+import { City, Coordinates, IconProperties, Offers } from '../../types/models';
 import useMap from '../../hooks/useMap';
 import L from 'leaflet';
 import PinActive from'/img/pin-active.svg';
@@ -26,8 +26,13 @@ const currentCustomIcon = L.icon({
   iconAnchor: ICON_PROPERTIES.iconAnchor,
 });
 
+type MapOffer = {
+  id: string;
+  location: Coordinates;
+};
+
 type MapProps = {
-  offers?: Offers;
+  offers?: MapOffer[];
   city?: City;
   activeOfferId?: string;
 }

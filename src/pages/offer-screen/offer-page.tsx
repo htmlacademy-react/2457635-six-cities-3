@@ -28,7 +28,12 @@ export function OfferPage ({id, currentOffer, reviews, nearOffers}: OfferScreenP
   const {isPremium, title, rating, bedrooms, type, maxAdults, price, goods, host, description, images} = currentOffer;
   const ratingValue = rating * 20;
   const sortedReviews = sortingReview(reviews);
-  const mapOffers = [currentOffer, ...nearOffers.filter((offer) => offer.id !== currentOffer.id)];
+  const mapOffers = [
+    {id: currentOffer.id, location: currentOffer.location},
+    ...nearOffers
+      .filter((offer) => offer.id !== currentOffer.id)
+      .map((offer) => ({id: offer.id, location: offer.location}))
+  ];
 
   return (
     <div className="page" data-testid='offer-screen-container'>

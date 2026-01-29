@@ -6,7 +6,6 @@ import { MemoryHistory, createMemoryHistory } from 'history';
 import { TestIdMarkups } from '../../test/testid-markup';
 import { Route, Routes } from 'react-router-dom';
 import OfferScreen from './offer-screen';
-import { AppRoute } from '../../constants';
 import '@testing-library/jest-dom';
 
 describe('Component: OfferScreen', () => {

@@ -1,7 +1,7 @@
 import { AxiosInstance } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AppDispatch, State } from '../types/state';
-import { AuthData, CurrentOffer, CurrentOfferId, Offer, Offers, Review, Reviews, SendReview, UserData } from '../types/models';
+import { AuthData, CurrentOffer, CurrentOfferId, Offers, Review, Reviews, SendReview, UserData } from '../types/models';
 import { ApiRoute, AppRoute, ErrorMessages } from '../constants';
 import { redirectToRoute } from './action';
 import { dropToken, getToken, saveToken } from '../services/token';
