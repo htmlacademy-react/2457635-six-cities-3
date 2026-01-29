@@ -11,11 +11,14 @@ type TownProps = {
 export default function Town({town}: TownProps) {
   const dispatch = useAppDispatch();
   const city = useAppSelector(getCityName);
-  const handleTownSelect = () => dispatch(changeTown(town));
+  const handleTownSelect = (evt: React.MouseEvent<HTMLAnchorElement>) => {
+    evt.preventDefault();
+    dispatch(changeTown(town));
+  };
 
   return (
-    <li className="locations__item" onClick={handleTownSelect} data-testid='town-container'>
-      <a className={cn('locations__item-link', 'tabs__item', {'tabs__item--active': city === town.name})} href="#" data-testid='href-container'>
+    <li className="locations__item" data-testid='town-container'>
+      <a className={cn('locations__item-link', 'tabs__item', {'tabs__item--active': city === town.name})} href="#" data-testid='href-container' onClick={handleTownSelect}>
         <span>{town.name}</span>
       </a>
     </li>

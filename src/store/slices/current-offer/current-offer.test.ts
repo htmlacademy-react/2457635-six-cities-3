@@ -10,6 +10,9 @@ describe('Current offer slice', () => {
       currentOffer: {} as CurrentOffer,
       isCurrentOfferLoaded: false,
       hasCurrentOfferError: false,
+      nearOffers: [],
+      isNearOffersLoading: false,
+      hasNearOffersError: false,
     };
     const emptyAction = { type: '' };
 
@@ -23,6 +26,9 @@ describe('Current offer slice', () => {
       currentOffer: {} as CurrentOffer,
       isCurrentOfferLoaded: false,
       hasCurrentOfferError: false,
+      nearOffers: [],
+      isNearOffersLoading: false,
+      hasNearOffersError: false,
     };
 
     const result = currentOffer.reducer(undefined, emptyAction);
@@ -34,11 +40,17 @@ describe('Current offer slice', () => {
       currentOffer: {} as CurrentOffer,
       isCurrentOfferLoaded: false,
       hasCurrentOfferError: false,
+      nearOffers: [],
+      isNearOffersLoading: false,
+      hasNearOffersError: false,
     };
     const expectedState = {
       currentOffer: {} as CurrentOffer,
       isCurrentOfferLoaded: true,
       hasCurrentOfferError: false,
+      nearOffers: [],
+      isNearOffersLoading: false,
+      hasNearOffersError: false,
     };
 
     const result = currentOffer.reducer(initialState, getDataCurrentOffer.pending);
@@ -50,11 +62,17 @@ describe('Current offer slice', () => {
       currentOffer: {} as CurrentOffer,
       isCurrentOfferLoaded: false,
       hasCurrentOfferError: false,
+      nearOffers: [],
+      isNearOffersLoading: false,
+      hasNearOffersError: false,
     };
     const expectedState = {
       currentOffer: fakeCurrentOffer,
       isCurrentOfferLoaded: false,
       hasCurrentOfferError: false,
+      nearOffers: [],
+      isNearOffersLoading: false,
+      hasNearOffersError: false,
     };
 
     const result = currentOffer.reducer(initialState, getDataCurrentOffer.fulfilled(expectedState.currentOffer, expectedState.currentOffer.id, undefined));
@@ -66,11 +84,17 @@ describe('Current offer slice', () => {
       currentOffer: {} as CurrentOffer,
       isCurrentOfferLoaded: false,
       hasCurrentOfferError: false,
+      nearOffers: [],
+      isNearOffersLoading: false,
+      hasNearOffersError: false,
     };
     const expectedState = {
       currentOffer: {} as CurrentOffer,
       isCurrentOfferLoaded: false,
       hasCurrentOfferError: true,
+      nearOffers: [],
+      isNearOffersLoading: false,
+      hasNearOffersError: false,
     };
 
     const result = currentOffer.reducer(initialState, getDataCurrentOffer.rejected);
@@ -82,11 +106,17 @@ describe('Current offer slice', () => {
       currentOffer: fakeCurrentOffer,
       isCurrentOfferLoaded: false,
       hasCurrentOfferError: false,
+      nearOffers: [],
+      isNearOffersLoading: false,
+      hasNearOffersError: false,
     };
     const expectedState = {
       currentOffer: {...fakeCurrentOffer, isFavorite: !fakeCurrentOffer.isFavorite},
       isCurrentOfferLoaded: false,
       hasCurrentOfferError: false,
+      nearOffers: [],
+      isNearOffersLoading: false,
+      hasNearOffersError: false,
     };
 
     const result = currentOffer.reducer(initialState, setCurrentOfferFavorite(expectedState.currentOffer.isFavorite));

@@ -4,7 +4,7 @@ import { AppDispatch, State } from '../types/state';
 import { AuthData, CurrentOffer, CurrentOfferId, Offer, Offers, Review, Reviews, SendReview, UserData } from '../types/models';
 import { ApiRoute, AppRoute, ErrorMessages } from '../constants';
 import { redirectToRoute } from './action';
-import { dropToken, saveToken } from '../services/token';
+import { dropToken, getToken, saveToken } from '../services/token';
 import { addUserReview } from './slices/review/action';
 import { dropUserData, setUserData } from './slices/user/actions';
 import { setFavoriteOffers } from './slices/favorite-offers/actions';
@@ -64,14 +64,39 @@ export const getReviews = createAsyncThunk<Reviews, CurrentOfferId, {
     }
   }
 );
-export const checkAuthAction = createAsyncThunk<void, undefined, {
+export const getNearbyOffers = createAsyncThunk<Offers, CurrentOfferId, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
 }
 >(
+  'data/getNearbyOffers',
+  async (id, { extra: api, rejectWithValue }) => {
+    if (!id) {
+      return rejectWithValue(ErrorMessages.NoID);
+    }
+
+    try {
+      const { data } = await api.get<Offers>(`/offers/${id}/nearby`);
+      return data;
+    } catch (error: unknown) {
+      return rejectWithValue(error || ErrorMessages.FailLoadData);
+    }
+  }
+);
+export const checkAuthAction = createAsyncThunk<void, undefined, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+  rejectValue: string;
+}
+>(
   'user/checkAuth',
-  async (_arg, {extra: api}) => {
+  async (_arg, {extra: api, rejectWithValue}) => {
+    if (!getToken()) {
+      return rejectWithValue('No token');
+    }
+
     await api.get(ApiRoute.Login);
   },
 );
@@ -100,20 +125,27 @@ export const loginAction = createAsyncThunk<void, AuthData, {
     dispatch(setUserData(data));
     dispatch(redirectToRoute(AppRoute.Main));
     dispatch(fetchOfferAction());
+    dispatch(getFavoriteOffers());
   },
 );
 
-export const addFavoriteOffer = createAsyncThunk<CurrentOffer, Offer, {
+type FavoritePayload = {
+  id: string;
+  isFavorite: boolean;
+};
+
+export const addFavoriteOffer = createAsyncThunk<CurrentOffer, FavoritePayload, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
 }
 >(
   'favoriteOffers/add',
-  async ({id, isFavorite}, {extra: api, rejectWithValue}) => {
+  async ({id, isFavorite}, {dispatch, extra: api, rejectWithValue}) => {
     try {
       const {data} = await api.post<CurrentOffer>(`/favorite/${id}/${Number(!isFavorite)}`);
 
+      dispatch(getFavoriteOffers());
       return data;
     } catch (error : unknown) {
       return rejectWithValue(error || ErrorMessages.FailAddFavorite);
@@ -139,12 +171,16 @@ export const sendUserReview = createAsyncThunk<void, SendReview, {
 }
 >(
   'post/review',
-  async({comment, rating, offerId}, {dispatch, extra: api}) => {
+  async({comment, rating, offerId}, {dispatch, extra: api, rejectWithValue}) => {
     if (!offerId) {
-      return;
+      return rejectWithValue(ErrorMessages.NoID);
     }
-    const {data} = await api.post<Review>(`/comments/${offerId}`, {comment, rating});
-    dispatch(addUserReview(data));
+    try {
+      const {data} = await api.post<Review>(`/comments/${offerId}`, {comment, rating});
+      dispatch(addUserReview(data));
+    } catch (error: unknown) {
+      return rejectWithValue(error || ErrorMessages.FailLoadData);
+    }
   }
 );
 export const logoutAction = createAsyncThunk<void, undefined, {

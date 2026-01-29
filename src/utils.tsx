@@ -3,7 +3,10 @@ import { Offer, Offers, Review, Reviews } from './types/models';
 
 export const getCurrentDate = (convertData: Date) => `${convertData.getFullYear()}-${convertData.getMonth() + 1}-${convertData.getDate()}`;
 
-export const getMonthAndYear = (convertData: Date) => `${convertData.toLocaleString('default', {month: 'long'})} ${convertData.getFullYear()}`;
+export const getMonthAndYear = (convertData: Date) => {
+  const month = convertData.toLocaleString('en-US', {month: 'long'}).toLowerCase();
+  return `${month} ${convertData.getFullYear()}`;
+};
 
 const sortingMethods = {
   lowToHighPriceSorting: (first: Offer, second: Offer) => first.price - second.price,
@@ -13,13 +16,16 @@ const sortingMethods = {
 
 export const sortingTypes = {
   popularOffers: (offers: Offers, name: string) => offers.filter((offer) => offer.city.name === name),
-  priceLowToHighOffers: (offers: Offers) => offers.sort(sortingMethods.lowToHighPriceSorting),
-  priceHighToLowOffers: (offers: Offers) => offers.sort(sortingMethods.highToLowPriceSorting),
-  topRatingOffers: (offers: Offers) => offers.sort(sortingMethods.highToLowRatingSorting),
+  priceLowToHighOffers: (offers: Offers) => [...offers].sort(sortingMethods.lowToHighPriceSorting),
+  priceHighToLowOffers: (offers: Offers) => [...offers].sort(sortingMethods.highToLowPriceSorting),
+  topRatingOffers: (offers: Offers) => [...offers].sort(sortingMethods.highToLowRatingSorting),
 };
 
 export const replaceOffersArray = (offers: Offers, id: string) => {
   const currentOfferIndex = offers.findIndex((offer) => offer.id === id);
+  if (currentOfferIndex === -1) {
+    return offers;
+  }
   offers[currentOfferIndex].isFavorite = !offers[currentOfferIndex].isFavorite;
 
   return offers;
@@ -61,7 +67,7 @@ export const deletingDuplicateCities = (offers: Offers) => {
   return modifiedOffers;
 };
 
-export const sortingFavoriteOffers = (offers: Offers) => deletingDuplicateCities([...offers].sort(townSort));
+export const sortingFavoriteOffers = (offers: Offers) => [...offers].sort(townSort);
 
 export const removeFavoriteOffersData = (offers: Offers) => offers.map((offer) => ({
   ...offer,

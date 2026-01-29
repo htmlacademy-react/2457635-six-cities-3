@@ -17,7 +17,7 @@ export default function App() {
   const isDataLoading = useAppSelector(getCurrentLoadingStatus);
   const hasError = useAppSelector(getErrorStatus);
 
-  if (authorizationStatus === AuthorizationStatus.Unknown || isDataLoading) {
+  if (authorizationStatus === AuthorizationStatus.Unknown || (authorizationStatus === AuthorizationStatus.Auth && isDataLoading)) {
     return (
       <LoadingScreen />
     );

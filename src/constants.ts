@@ -7,7 +7,7 @@ export const REVIEW_LENGTH = 10;
 export enum AppRoute {
   Main = '/',
   Login = '/login',
-  Favorites = '/favorites/',
+  Favorites = '/favorites',
   Offer = '/offer/:id',
   Error = '/*',
 }

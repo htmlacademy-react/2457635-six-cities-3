@@ -120,6 +120,9 @@ export const fakeStore = () => ({
     currentOffer: {...fakeCurrentOffer, id: fakeOffers[0].id},
     isCurrentOfferLoaded: false,
     hasCurrentOfferError: false,
+    nearOffers: fakeOffers,
+    isNearOffersLoading: false,
+    hasNearOffersError: false,
   },
   REVIEW: {
     reviews: fakeReviews,
