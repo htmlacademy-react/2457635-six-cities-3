@@ -51,7 +51,7 @@ describe('Component: OfferScreen', () => {
           hasNearOffersError: false,
         },
       });
-    const withHistoryComponent = withHistory(withStoreComponent);
+    const withHistoryComponent = withHistory(withStoreComponent, mockHistory);
 
     render(withHistoryComponent);
     const notExpectedContainer = screen.queryByTestId(TestIdMarkups.OfferScreenTestId);

@@ -145,7 +145,7 @@ export const addFavoriteOffer = createAsyncThunk<CurrentOffer, FavoritePayload, 
     try {
       const {data} = await api.post<CurrentOffer>(`/favorite/${id}/${Number(!isFavorite)}`);
 
-      dispatch(getFavoriteOffers());
+      await dispatch(getFavoriteOffers());
       return data;
     } catch (error : unknown) {
       return rejectWithValue(error || ErrorMessages.FailAddFavorite);

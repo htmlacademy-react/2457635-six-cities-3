@@ -32,7 +32,7 @@ export const reviews = createSlice({
       .addCase(getReviews.rejected, (state) => {
         state.isReviewLoaded = false;
         state.hasReviewError = true;
-        state.reviews = [] as Reviews;
+        state.reviews = null as unknown as Reviews;
       });
 
   },
