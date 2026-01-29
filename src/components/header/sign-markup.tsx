@@ -16,7 +16,7 @@ export default function SignMarkup () {
       <span className="header__signout">{'Sign out'}</span>
     </Link>
   ) : (
-    <Link className="header__nav-link" to="/login" data-testid='no-auth-markup-container'>
+    <Link className="header__nav-link header__nav-link--profile" to="/login" data-testid='no-auth-markup-container'>
       <span className="header__signin">{'Sign in'}</span>
     </Link>
   );

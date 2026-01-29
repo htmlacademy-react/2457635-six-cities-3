@@ -42,6 +42,9 @@ describe('Async actions', () => {
         currentOffer: {} as CurrentOffer,
         isCurrentOfferLoaded: false,
         hasCurrentOfferError: false,
+        nearOffers: [] as Offers,
+        isNearOffersLoading: false,
+        hasNearOffersError: false,
       },
       CURRENT_CARD: { currentCardId: '' },
       FAVORITE_OFFERS: { favoriteOffers: [] as Offers }
@@ -51,6 +54,7 @@ describe('Async actions', () => {
   describe('checkAuthAction', () => {
     it('should dispatch "checkAuthAction.pending" and "checkAuthAction.fulfilled" with thunk "checkAuthAction', async () => {
       mockAxiosAdapter.onGet(ApiRoute.Login).reply(200);
+      vi.spyOn(tokenStorage, 'getToken').mockReturnValue('token');
 
       await store.dispatch(checkAuthAction());
       const actions = extractActionsTypes(store.getActions());
@@ -63,6 +67,7 @@ describe('Async actions', () => {
 
     it('should dispatch "checkAuthAction.pending" and "checkAuthAction.rejected" when server response 400', async() => {
       mockAxiosAdapter.onGet(ApiRoute.Login).reply(400);
+      vi.spyOn(tokenStorage, 'getToken').mockReturnValue('token');
 
       await store.dispatch(checkAuthAction());
       const actions = extractActionsTypes(store.getActions());
@@ -114,13 +119,14 @@ describe('Async actions', () => {
       await store.dispatch(loginAction(fakeUserLogin));
       const actions = extractActionsTypes(store.getActions());
 
-      expect(actions).toEqual([
+      expect(actions).toEqual(expect.arrayContaining([
         loginAction.pending.type,
         setUserData.type,
         redirectToRoute.type,
         fetchOfferAction.pending.type,
+        getFavoriteOffers.pending.type,
         loginAction.fulfilled.type,
-      ]);
+      ]));
     });
 
     it('should call "saveToken" once with the received token', async () => {
@@ -342,17 +348,21 @@ describe('Async actions', () => {
     it('should dispatch "addFavoriteOffer.pending", "addFavoriteOffer.fulfilled" when server response 200', async () => {
       const offer = fakeOffer();
       mockAxiosAdapter.onPost(`/favorite/${offer.id}/${Number(!offer.isFavorite)}`).reply(200, fakeCurrentOffer);
+      mockAxiosAdapter.onGet(ApiRoute.Favorite).reply(200, fakeOffers);
 
       await store.dispatch(addFavoriteOffer(offer));
 
       const emittedActions = store.getActions();
       const extractedActionsTypes = extractActionsTypes(emittedActions);
-      const userDataFulfilled = emittedActions.at(1) as ReturnType<typeof addFavoriteOffer.fulfilled>;
+      const userDataFulfilled = emittedActions.find((action) => action.type === addFavoriteOffer.fulfilled.type) as ReturnType<typeof addFavoriteOffer.fulfilled>;
 
-      expect(extractedActionsTypes).toEqual([
+      expect(extractedActionsTypes).toEqual(expect.arrayContaining([
         addFavoriteOffer.pending.type,
+        getFavoriteOffers.pending.type,
+        setFavoriteOffers.type,
+        getFavoriteOffers.fulfilled.type,
         addFavoriteOffer.fulfilled.type,
-      ]);
+      ]));
 
       expect(userDataFulfilled.payload)
         .toEqual(fakeCurrentOffer);

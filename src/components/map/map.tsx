@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { IconProperties } from '../../types/models';
+import { City, Coordinates, IconProperties } from '../../types/models';
 import useMap from '../../hooks/useMap';
 import L from 'leaflet';
 import PinActive from'/img/pin-active.svg';
@@ -14,43 +14,60 @@ const ICON_PROPERTIES: IconProperties = {
   iconSize: [40, 40],
 };
 
-export default function Map () {
+const defaultCustomIcon = L.icon({
+  iconUrl: Pin,
+  iconSize: ICON_PROPERTIES.iconSize,
+  iconAnchor: ICON_PROPERTIES.iconAnchor,
+});
+
+const currentCustomIcon = L.icon({
+  iconUrl: PinActive,
+  iconSize: ICON_PROPERTIES.iconSize,
+  iconAnchor: ICON_PROPERTIES.iconAnchor,
+});
+
+type MapOffer = {
+  id: string;
+  location: Coordinates;
+};
+
+type MapProps = {
+  offers?: MapOffer[];
+  city?: City;
+  activeOfferId?: string;
+}
+
+export default function Map ({offers: offersProp, city: cityProp, activeOfferId}: MapProps) {
   const mapRef = useRef(null);
-  const city = useAppSelector(getCity);
+  const selectedCard = useAppSelector(getCurrentCardId);
+  const cityFromStore = useAppSelector(getCity);
+  const offersFromStore = useAppSelector(getSortedOffers);
+  const city = cityProp ?? cityFromStore;
+  const offers = offersProp ?? offersFromStore;
+  const activeId = selectedCard || activeOfferId;
   const map = useMap({mapRef, city});
   const markersRef = useRef<L.Marker[]>([]);
-  const offers = useAppSelector(getSortedOffers);
-  const selectedCard = useAppSelector(getCurrentCardId);
-
-  const defaultCustomIcon = L.icon({
-    iconUrl: Pin,
-    iconSize: ICON_PROPERTIES.iconSize,
-    iconAnchor: ICON_PROPERTIES.iconAnchor,
-  });
-
-  const currentCustomIcon = L.icon({
-    iconUrl: PinActive,
-    iconSize: ICON_PROPERTIES.iconSize,
-    iconAnchor: ICON_PROPERTIES.iconAnchor,
-  });
 
   useEffect(() => {
     if (map) {
       markersRef.current.forEach((marker) => marker.remove());
       markersRef.current = [];
-      map.setView({lat: city.location.latitude, lng: city.location.longitude}, 12);
+      map.setView(
+        {lat: city.location.latitude, lng: city.location.longitude},
+        city.location.zoom
+      );
       offers.forEach((offer) => {
         const offerMarker = L.marker({
           lat: offer.location.latitude,
           lng: offer.location.longitude
         }, {
-          icon: (offer.id === selectedCard) ? currentCustomIcon : defaultCustomIcon,
+          icon: (offer.id === activeId) ? currentCustomIcon : defaultCustomIcon,
         }).addTo(map);
 
         markersRef.current.push(offerMarker);
       });
     }
-  }, [city.location.longitude, city.location.latitude, currentCustomIcon, defaultCustomIcon, map, offers, selectedCard]);
+  }, [activeId, city.location.latitude, city.location.longitude, city.location.zoom, map, offers]);
 
   return (
     <div

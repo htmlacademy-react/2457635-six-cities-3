@@ -2,15 +2,19 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { Link } from 'react-router-dom';
 import { HotelCardMemo } from '../hotel-cards/hotel-card';
 import { setCurrentCardId } from '../../store/slices/current-card/current-card';
-import { getSortedOffers } from '../../store/reducer';
-import { getCurrentOffer } from '../../store/slices/current-offer/selectors';
+import { getCurrentOffer, getNearOffers, getNearOffersLoading } from '../../store/slices/current-offer/selectors';
 
 
 export default function NearOffers () {
   const dispatch = useAppDispatch();
-  const offers = useAppSelector(getSortedOffers);
+  const offers = useAppSelector(getNearOffers);
+  const isNearOffersLoading = useAppSelector(getNearOffersLoading);
   const id = useAppSelector(getCurrentOffer).id;
-  const anotherOffers = offers.filter((offer) => offer.id !== id);
+  const anotherOffers = offers.filter((offer) => offer.id !== id).slice(0, 3);
+
+  if (isNearOffersLoading) {
+    return <div className="near-places__list places__list" data-testid='near-offers-container'></div>;
+  }
 
   return(
     <div className="near-places__list places__list" data-testid='near-offers-container'>

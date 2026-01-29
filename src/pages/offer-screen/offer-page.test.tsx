@@ -13,7 +13,7 @@ describe('Component: OfferPage', () => {
   const store = fakeStore();
 
   it('should render OfferPage', () => {
-    const { withStoreComponent } = withStore(<OfferPage id={id} reviews={reviews} currentOffer={currentOffer}/>, store);
+    const { withStoreComponent } = withStore(<OfferPage id={id} reviews={reviews} currentOffer={currentOffer} nearOffers={[]}/>, store);
     const withHistoryComponent = withHistory(withStoreComponent);
 
     render(withHistoryComponent);
@@ -23,11 +23,14 @@ describe('Component: OfferPage', () => {
   });
 
   it('should not render OfferScreen when currentOffer is null', () => {
-    const { withStoreComponent } = withStore(<OfferPage id={id} reviews={reviews} currentOffer={{} as CurrentOffer}/>, {...store,
+    const { withStoreComponent } = withStore(<OfferPage id={id} reviews={reviews} currentOffer={{} as CurrentOffer} nearOffers={[]}/>, {...store,
       CURRENT_OFFER: {
         currentOffer: {} as CurrentOffer,
         isCurrentOfferLoaded: false,
         hasCurrentOfferError: false,
+        nearOffers: [],
+        isNearOffersLoading: false,
+        hasNearOffersError: false,
       },
     });
     const withHistoryComponent = withHistory(withStoreComponent);
@@ -39,7 +42,7 @@ describe('Component: OfferPage', () => {
   });
 
   it('should not render OfferFormReview when the user is not authorized', () => {
-    const { withStoreComponent } = withStore(<OfferPage id={id} reviews={reviews} currentOffer={currentOffer}/>, store);
+    const { withStoreComponent } = withStore(<OfferPage id={id} reviews={reviews} currentOffer={currentOffer} nearOffers={[]}/>, store);
     const withHistoryComponent = withHistory(withStoreComponent);
 
     render(withHistoryComponent);

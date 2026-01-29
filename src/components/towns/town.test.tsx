@@ -28,8 +28,8 @@ describe('Component: Town', () => {
     const { withStoreComponent, mockStore } = withStore(<Town town={currentCity} />, store);
 
     render(withStoreComponent);
-    const townContainer = screen.getByTestId(TestIdMarkups.TownTestId);
-    fireEvent.click(townContainer);
+    const hrefContainer = screen.getByTestId(TestIdMarkups.TownHrefTestId);
+    fireEvent.click(hrefContainer);
     const actions = extractActionsTypes(mockStore.getActions());
 
     expect(actions).toEqual([changeTown.type]);
@@ -39,9 +39,8 @@ describe('Component: Town', () => {
     const { withStoreComponent } = withStore(<Town town={currentCity} />, store);
 
     render(withStoreComponent);
-    const townContainer = screen.getByTestId(TestIdMarkups.TownTestId);
     const hrefContainer = screen.getByTestId(TestIdMarkups.TownHrefTestId);
-    fireEvent.click(townContainer);
+    fireEvent.click(hrefContainer);
 
     expect(hrefContainer).toHaveClass(townActiveClass);
   });

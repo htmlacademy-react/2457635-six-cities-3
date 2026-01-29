@@ -1,6 +1,6 @@
 import Header from '../../components/header/header';
 import OfferFormReview from '../../components/offer-screen-hoc/offer-form-review';
-import { CurrentOffer, Reviews } from '../../types/models';
+import { CurrentOffer, Offers, Reviews } from '../../types/models';
 import OfferHost from '../../components/offer-screen-hoc/offer-host';
 import OfferFeautures from '../../components/offer-screen-hoc/offer-feautures';
 import OfferReviewList from '../../components/offer-screen-hoc/offer-review-list';
@@ -10,21 +10,29 @@ import Map from '../../components/map/map';
 import OfferOptionList from '../../components/offer-screen-hoc/offer-option-list';
 import OfferImageList from '../../components/offer-screen-hoc/offer-image-list';
 import OfferFavoriteButton from '../../components/offer-screen-hoc/offer-favorite-button';
+import { sortingReview } from '../../utils';
 
 type OfferScreenProps = {
   id?: string;
   currentOffer: CurrentOffer;
   reviews: Reviews;
+  nearOffers: Offers;
 }
 
-export function OfferPage ({id, currentOffer, reviews}: OfferScreenProps) {
-
-  if (!('id' in currentOffer)) {
+export function OfferPage ({id, currentOffer, reviews, nearOffers}: OfferScreenProps) {
+  if (!currentOffer || !('id' in currentOffer) || !currentOffer.id) {
     return <LoadingScreen />;
   }
 
   const {isPremium, title, rating, bedrooms, type, maxAdults, price, goods, host, description, images} = currentOffer;
   const ratingValue = rating * 20;
+  const sortedReviews = sortingReview(reviews);
+  const mapOffers = [
+    {id: currentOffer.id, location: currentOffer.location},
+    ...nearOffers
+      .filter((offer) => offer.id !== currentOffer.id)
+      .map((offer) => ({id: offer.id, location: offer.location}))
+  ];
 
   return (
     <div className="page" data-testid='offer-screen-container'>
@@ -62,14 +70,14 @@ export function OfferPage ({id, currentOffer, reviews}: OfferScreenProps) {
               </div>
               {host && <OfferHost host={host} description={description}/>}
               <section className="offer__reviews reviews">
-                <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews && reviews.length}</span></h2>
-                {reviews && <OfferReviewList reviews={reviews}/>}
+                <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
+                <OfferReviewList reviews={sortedReviews}/>
                 {<OfferFormReview id={id}/>}
               </section>
             </div>
           </div>
-          <section className='map' style={{width: '100%'}}>
-            <Map />
+          <section className='offer__map map'>
+            <Map city={currentOffer.city} offers={mapOffers} activeOfferId={currentOffer.id} />
           </section>
         </section>
         <div className="container">

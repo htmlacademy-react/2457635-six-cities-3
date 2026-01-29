@@ -9,6 +9,9 @@ describe('Current offer selectors', () => {
         currentOffer: fakeCurrentOffer,
         isCurrentOfferLoaded: false,
         hasCurrentOfferError: false,
+        nearOffers: [],
+        isNearOffersLoading: false,
+        hasNearOffersError: false,
       }
     };
     const expectedCurrentOffer = fakeCurrentOffer;
