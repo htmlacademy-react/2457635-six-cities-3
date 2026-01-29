@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { City, Coordinates, IconProperties, Offers } from '../../types/models';
+import { City, Coordinates, IconProperties } from '../../types/models';
 import useMap from '../../hooks/useMap';
 import L from 'leaflet';
 import PinActive from'/img/pin-active.svg';
