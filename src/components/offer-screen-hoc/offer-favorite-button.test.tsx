@@ -61,6 +61,9 @@ describe('Component: OfferFavoriteButton', () => {
         currentOffer: {} as CurrentOffer,
         isCurrentOfferLoaded: false,
         hasCurrentOfferError: false,
+        nearOffers: [],
+        isNearOffersLoading: false,
+        hasNearOffersError: false,
       }
     });
     const withHistoryComponent = withHistory(withStoreComponent);

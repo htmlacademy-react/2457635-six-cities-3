@@ -7,7 +7,6 @@ import { TestIdMarkups } from '../../test/testid-markup';
 import { Route, Routes } from 'react-router-dom';
 import OfferScreen from './offer-screen';
 import { AppRoute } from '../../constants';
-import ErrorScreen from '../error-screen/error-screen';
 import '@testing-library/jest-dom';
 
 describe('Component: OfferScreen', () => {
@@ -23,7 +22,6 @@ describe('Component: OfferScreen', () => {
   it('should render OfferPage when the current offer is found among all offers ', () => {
     const { withStoreComponent } = withStore(
       <Routes>
-        <Route path={AppRoute.Error} element={<ErrorScreen />} />
         <Route path='/offer/:id' element={<OfferScreen />} />
       </Routes>,
       store
@@ -32,31 +30,33 @@ describe('Component: OfferScreen', () => {
 
     render(withHistoryComponent);
     const expectedContainer = screen.getByTestId(TestIdMarkups.OfferScreenTestId);
-    const notExpectedContainer = screen.queryByText(TestIdMarkups.ErrorTestId);
+    const notExpectedContainer = screen.queryByText(TestIdMarkups.NotFoundTestId);
 
     expect(expectedContainer).toBeInTheDocument();
     expect(notExpectedContainer).not.toBeInTheDocument();
   });
 
 
-  it('should not render OfferPage when the current offer is empty ', () => {
+  it('should show NotFoundScreen when current offer has an error', () => {
     const { withStoreComponent } = withStore(
       <Routes>
-        <Route path={AppRoute.Error} element={<ErrorScreen />} />
         <Route path='/offer/:id' element={<OfferScreen />} />
       </Routes>,
       {...store,
         CURRENT_OFFER: {
-          currentOffer: null as unknown as CurrentOffer,
+          currentOffer: {} as CurrentOffer,
           isCurrentOfferLoaded: false,
-          hasCurrentOfferError: false,
+          hasCurrentOfferError: true,
+          nearOffers: [],
+          isNearOffersLoading: false,
+          hasNearOffersError: false,
         },
       });
     const withHistoryComponent = withHistory(withStoreComponent);
 
     render(withHistoryComponent);
     const notExpectedContainer = screen.queryByTestId(TestIdMarkups.OfferScreenTestId);
-    const expectedContainer = screen.getByTestId(TestIdMarkups.ErrorTestId);
+    const expectedContainer = screen.getByTestId(TestIdMarkups.NotFoundTestId);
 
     expect(notExpectedContainer).not.toBeInTheDocument();
     expect(expectedContainer).toBeInTheDocument();

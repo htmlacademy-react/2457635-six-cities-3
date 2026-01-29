@@ -3,12 +3,12 @@ import { getCurrentAuth } from '../../store/slices/auth/selectors';
 import { AuthorizationStatus } from '../../constants';
 import { getUserData } from '../../store/slices/user/selectors';
 import { Link } from 'react-router-dom';
-import { getFavoriteOffers } from '../../store/slices/offers/selectors';
+import { getAllFavoriteOffers } from '../../store/slices/favorite-offers/selectors';
 
 export default function LoginMarkup () {
   const loggedStatus = useAppSelector(getCurrentAuth);
   const user = useAppSelector(getUserData);
-  const currentFavoriteOffers = useAppSelector(getFavoriteOffers);
+  const currentFavoriteOffers = useAppSelector(getAllFavoriteOffers);
 
   return loggedStatus === AuthorizationStatus.Auth ?
     (
@@ -20,5 +20,5 @@ export default function LoginMarkup () {
         <span className="header__favorite-count">{currentFavoriteOffers.length}</span>
       </Link>
     )
-    : '';
+    : null;
 }

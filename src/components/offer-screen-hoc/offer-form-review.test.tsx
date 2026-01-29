@@ -74,7 +74,7 @@ describe('Component: OfferFormReview', () => {
     const button = screen.getByRole('button');
     const textArea = screen.getByPlaceholderText(text);
     const rating = screen.getByTestId(TestIdMarkups.OfferFormReviewInputTestId);
-    const userText = 'a'.repeat(51);
+    const userText = 'a'.repeat(50);
     fireEvent.click(rating);
     fireEvent.change(textArea, { target: { value: userText } });
     fireEvent.click(button);

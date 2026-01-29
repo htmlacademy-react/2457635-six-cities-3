@@ -5,7 +5,7 @@ import { loginAction } from '../../store/api-actions';
 import { changeTown } from '../../store/slices/town/town';
 import { getRandomTown } from '../../utils';
 import { AuthStatus } from '../../types/models';
-import { AppRoute } from '../../constants';
+import { AppRoute, AuthorizationStatus } from '../../constants';
 
 type LoginScreenProps = {
   authorizationStatus: AuthStatus;
@@ -28,7 +28,7 @@ export default function LoginScreen ({authorizationStatus}: LoginScreenProps) {
     }
   };
 
-  if (authorizationStatus === 'AUTH') {
+  if (authorizationStatus === AuthorizationStatus.Auth) {
     return <Navigate to={AppRoute.Main} />;
   }
 

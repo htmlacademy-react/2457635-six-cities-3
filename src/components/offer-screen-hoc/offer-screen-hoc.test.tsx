@@ -25,6 +25,9 @@ describe('Pages: OfferScreenHOC', () => {
         currentOffer: '' as unknown as CurrentOffer,
         isCurrentOfferLoaded: false,
         hasCurrentOfferError: false,
+        nearOffers: [],
+        isNearOffersLoading: false,
+        hasNearOffersError: false,
       }
     });
     const withHistoryComponent = withHistory(withStoreComponent);

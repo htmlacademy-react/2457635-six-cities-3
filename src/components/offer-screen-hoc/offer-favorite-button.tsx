@@ -13,7 +13,7 @@ import { setCurrentOfferFavorite } from '../../store/slices/current-offer/action
 export default function OfferFavoriteButton () {
   const dispatch = useAppDispatch();
   const currentOffer = useAppSelector(getCurrentOffer);
-  const favorite = currentOffer.isFavorite;
+  const favorite = currentOffer?.isFavorite ?? false;
   const loggedStatus = useAppSelector(getCurrentAuth);
   const bookmarked = favorite ? 'Is bookmarks' : 'To bookmarks';
   const [redirectToLogin, setRedirectToLogin] = useState(false);
@@ -26,12 +26,13 @@ export default function OfferFavoriteButton () {
       return;
     }
 
-    if (!offer) {
+    const targetOffer = offer ?? currentOffer;
+    if (!targetOffer?.id) {
       return;
     }
 
-    dispatch(addFavoriteOffer(offer));
-    dispatch(replaceOffer(offer.id));
+    dispatch(addFavoriteOffer({id: targetOffer.id, isFavorite: targetOffer.isFavorite}));
+    dispatch(replaceOffer(targetOffer.id));
     dispatch(setCurrentOfferFavorite(!favorite));
 
   };

@@ -3,6 +3,7 @@ import FavoritesEmptyScreen from '../../pages/favorites-screen/favorites-empty-s
 import Header from '../header/header.tsx';
 import { FavoriteItemListHOC } from './favorites-item-list-hoc.tsx';
 import { Offers } from '../../types/models.ts';
+import { Link } from 'react-router-dom';
 
 type FavoriteItemListProps = {
   offers: Offers;
@@ -13,6 +14,15 @@ export function Favorites ({offers}: FavoriteItemListProps) {
     return <FavoritesEmptyScreen />;
   }
 
+  const groupedOffers = offers.reduce<Record<string, Offers>>((acc, offer) => {
+    const cityName = offer.city.name;
+    if (!acc[cityName]) {
+      acc[cityName] = [];
+    }
+    acc[cityName].push(offer);
+    return acc;
+  }, {});
+
   return (
     <div className="page" data-testid='favorites-item-list-container'>
       <Header />
@@ -22,7 +32,20 @@ export function Favorites ({offers}: FavoriteItemListProps) {
           <section className="favorites">
             <h1 className="favorites__title">Saved listing</h1>
             <ul className="favorites__list">
-              {offers.map((offer) => <FavoritesItem offer={offer} key={offer.id}/>)}
+              {Object.entries(groupedOffers).map(([cityName, cityOffers]) => (
+                <li className="favorites__locations-items" key={cityName}>
+                  <div className="favorites__locations locations locations--current">
+                    <div className="locations__item">
+                      <Link className="locations__item-link" to="/">
+                        <span>{cityName}</span>
+                      </Link>
+                    </div>
+                  </div>
+                  <div className="favorites__places">
+                    {cityOffers.map((offer) => <FavoritesItem offer={offer} key={offer.id}/>)}
+                  </div>
+                </li>
+              ))}
             </ul>
           </section>
         </div>

@@ -3,7 +3,7 @@ import { changeTown, town } from './town';
 
 describe('Town slice', () => {
   const state = {
-    currentCity: CITIES[1],
+    currentCity: CITIES[0],
   };
 
   it ('should return initial state with empty action', () => {
