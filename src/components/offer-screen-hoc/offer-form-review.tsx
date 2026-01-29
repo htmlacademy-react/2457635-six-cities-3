@@ -39,29 +39,35 @@ export default function OfferFormReview ({id}: OfferFormReviewProps) {
     updateButtonState(text, value);
   };
 
-  const handleReviewSubmit = async (evt: FormEvent<HTMLFormElement>) => {
+  const handleReviewSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
     if (isButtonDisabled || isSubmitting) {
       return;
     }
 
-    setIsSubmitting(true);
-    const result = await dispatch(sendUserReview({
-      offerId: id,
-      comment: text,
-      rating: Number(ratingReview),
-    }));
-    if (sendUserReview.fulfilled.match(result)) {
-      setText('');
-      setRating('');
-      setIsButtonDisabled(true);
-    }
-    setIsSubmitting(false);
+    void (async () => {
+      setIsSubmitting(true);
+      const result = await dispatch(sendUserReview({
+        offerId: id,
+        comment: text,
+        rating: Number(ratingReview),
+      }));
+      if (sendUserReview.fulfilled.match(result)) {
+        setText('');
+        setRating('');
+        setIsButtonDisabled(true);
+      }
+      setIsSubmitting(false);
+    })();
   };
 
   return (
-    <form className="reviews__form form" action="#" method="post" onSubmit={handleReviewSubmit}
-    data-testid='form-review-container'
+    <form
+      className="reviews__form form"
+      action="#"
+      method="post"
+      onSubmit={handleReviewSubmit}
+      data-testid='form-review-container'
     >
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">

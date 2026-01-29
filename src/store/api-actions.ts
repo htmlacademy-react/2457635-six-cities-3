@@ -112,6 +112,18 @@ export const getUserData = createAsyncThunk<void, undefined, {
     dispatch(setUserData(data.data as UserData));
   },
 );
+export const getFavoriteOffers = createAsyncThunk<void, undefined, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}
+>(
+  'favoriteOffers/get',
+  async (_arg, {dispatch, extra: api}) => {
+    const {data} = await api.get<Offers>(ApiRoute.Favorite);
+    dispatch(setFavoriteOffers(data));
+  },
+);
 export const loginAction = createAsyncThunk<void, AuthData, {
   dispatch: AppDispatch;
   state: State;
@@ -150,18 +162,6 @@ export const addFavoriteOffer = createAsyncThunk<CurrentOffer, FavoritePayload, 
     } catch (error : unknown) {
       return rejectWithValue(error || ErrorMessages.FailAddFavorite);
     }
-  },
-);
-export const getFavoriteOffers = createAsyncThunk<void, undefined, {
-  dispatch: AppDispatch;
-  state: State;
-  extra: AxiosInstance;
-}
->(
-  'favoriteOffers/get',
-  async (_arg, {dispatch, extra: api}) => {
-    const {data} = await api.get<Offers>(ApiRoute.Favorite);
-    dispatch(setFavoriteOffers(data));
   },
 );
 export const sendUserReview = createAsyncThunk<void, SendReview, {

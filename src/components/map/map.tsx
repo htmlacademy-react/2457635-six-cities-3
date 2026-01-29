@@ -67,7 +67,7 @@ export default function Map ({offers: offersProp, city: cityProp, activeOfferId}
         markersRef.current.push(offerMarker);
       });
     }
-  }, [activeId, city.location.longitude, city.location.latitude, map, offers]);
+  }, [activeId, city.location.latitude, city.location.longitude, city.location.zoom, map, offers]);
 
   return (
     <div
