@@ -5,6 +5,7 @@ import { useAppDispatch } from '../../hooks';
 import { addFavoriteOffer } from '../../store/api-actions';
 import { replaceOffer } from '../../store/slices/offers/actions';
 import { setFavoriteOffer } from '../../store/slices/favorite-offers/actions';
+import { getOfferRoute } from '../../utils';
 
 type FavoritesItemProps = {
   offer: Offer;
@@ -14,10 +15,10 @@ export default function FavoritesItem ({offer}: FavoritesItemProps) {
   const dispatch = useAppDispatch();
   const {previewImage, price, rating, type, title} = offer;
 
-  const ratingValue = rating * RATING_MULTIPLIER;
+  const ratingValue = Math.round(rating) * RATING_MULTIPLIER;
 
   const handleFavoriteClick = () => {
-    dispatch(addFavoriteOffer(offer));
+    dispatch(addFavoriteOffer({id: offer.id, isFavorite: offer.isFavorite}));
     dispatch(replaceOffer(offer.id));
     dispatch(setFavoriteOffer(offer));
   };
@@ -25,7 +26,7 @@ export default function FavoritesItem ({offer}: FavoritesItemProps) {
   return (
     <article className="favorites__card place-card" data-testid='favorites-item-container'>
       <div className="favorites__image-wrapper place-card__image-wrapper">
-        <Link to={{pathname: `/offer/${offer.id}`}} state={offer}>
+        <Link to={{pathname: getOfferRoute(offer.id)}} state={offer}>
           <img className="place-card__image" src={previewImage} width="150" height="110" alt="Place image"/>
         </Link>
       </div>
@@ -49,7 +50,7 @@ export default function FavoritesItem ({offer}: FavoritesItemProps) {
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={{pathname: `/offer/${offer.id}`}} state={offer}>{title}</Link>
+          <Link to={{pathname: getOfferRoute(offer.id)}} state={offer}>{title}</Link>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>

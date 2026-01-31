@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { MemoryHistory, createMemoryHistory } from 'history';
 import { AppRoute, AuthorizationStatus } from '../../constants';
+import { getOfferRoute } from '../../utils';
 import App from './app';
 import { withHistory, withStore } from '../../test/mock-component';
 import { fakeOffers, fakeStore } from '../../test/mock';
@@ -61,10 +62,10 @@ describe('Application routing', () => {
     expect(screen.getByText(ComponentMarkups.BackToMain)).toBeInTheDocument();
   });
 
-  it('renders OfferScreen on "/offer/:id" route', () => {
+  it('renders OfferScreen on offer route', () => {
     const withHistoryComponent = withHistory(<App />, mockHistory);
     const { withStoreComponent } = withStore(withHistoryComponent, store);
-    mockHistory.push(`/offer/${currentOfferId}`);
+    mockHistory.push(getOfferRoute(currentOfferId));
 
     render(withStoreComponent);
 

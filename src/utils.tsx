@@ -1,11 +1,12 @@
-import { CITIES, REVIEW_LENGTH } from './constants';
+import { AppRoute, CITIES, REVIEW_LENGTH } from './constants';
 import { Offer, Offers, Review, Reviews } from './types/models';
 
 export const getCurrentDate = (convertData: Date) => `${convertData.getFullYear()}-${convertData.getMonth() + 1}-${convertData.getDate()}`;
 
 export const getMonthAndYear = (convertData: Date) => {
-  const month = convertData.toLocaleString('en-US', {month: 'long'}).toLowerCase();
-  return `${month} ${convertData.getFullYear()}`;
+  const month = convertData.toLocaleString('en-US', {month: 'long'});
+  const normalizedMonth = `${month.charAt(0).toUpperCase()}${month.slice(1)}`;
+  return `${normalizedMonth} ${convertData.getFullYear()}`;
 };
 
 const sortingMethods = {
@@ -78,3 +79,5 @@ export const getRandomTown = () => {
   const randomIndex = Math.floor(Math.random() * (CITIES.length - 1));
   return CITIES[randomIndex];
 };
+
+export const getOfferRoute = (id: string) => AppRoute.Offer.replace(':id', id);

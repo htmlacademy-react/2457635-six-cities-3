@@ -5,10 +5,10 @@ describe('Town selectors', () => {
   it('should return city', () => {
     const state = {
       [NameSpace.Town]: {
-        currentCity: CITIES[0],
+        currentCity: CITIES[1],
       }
     };
-    const expectedState = CITIES[0];
+    const expectedState = CITIES[1];
 
     const result = getCity(state);
 
@@ -19,10 +19,10 @@ describe('Town selectors', () => {
   it('should return city name', () => {
     const state = {
       [NameSpace.Town]: {
-        currentCity: CITIES[0],
+        currentCity: CITIES[1],
       }
     };
-    const expectedState = CITIES[0].name;
+    const expectedState = CITIES[1].name;
 
     const result = getCityName(state);
 

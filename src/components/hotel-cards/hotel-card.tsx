@@ -7,6 +7,7 @@ import { getCurrentAuth } from '../../store/slices/auth/selectors.ts';
 import { AppRoute, AuthorizationStatus, RATING_MULTIPLIER } from '../../constants.ts';
 import { addFavoriteOffer } from '../../store/api-actions.ts';
 import { replaceOffer } from '../../store/slices/offers/actions.ts';
+import { getOfferRoute } from '../../utils.tsx';
 
 
 type HotelCardProps = {
@@ -16,7 +17,7 @@ type HotelCardProps = {
 export function HotelCard ({offer}: HotelCardProps) {
   const {price, isFavorite, rating, title, type} = offer;
   const bookmarked = isFavorite ? 'Is bookmarks' : 'To bookmarks';
-  const ratingValue = rating * RATING_MULTIPLIER;
+  const ratingValue = Math.round(rating) * RATING_MULTIPLIER;
   const loggedStatus = useAppSelector(getCurrentAuth);
   const dispatch = useAppDispatch();
 
@@ -29,7 +30,7 @@ export function HotelCard ({offer}: HotelCardProps) {
       return;
     }
 
-    dispatch(addFavoriteOffer(offer));
+    dispatch(addFavoriteOffer({id: offer.id, isFavorite: offer.isFavorite}));
 
     dispatch(replaceOffer(offer.id));
 
@@ -60,7 +61,7 @@ export function HotelCard ({offer}: HotelCardProps) {
         </div>
       </div>
       <h2 className="place-card__name">
-        <Link to={{pathname: `/offer/${offer.id}`}} state={offer}>{title}</Link>
+        <Link to={{pathname: getOfferRoute(offer.id)}} state={offer}>{title}</Link>
       </h2>
       <p className="place-card__type">{type}</p>
     </div>

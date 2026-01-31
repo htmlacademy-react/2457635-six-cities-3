@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/index.ts';
 import { getSortedOffers } from '../../store/reducer.ts';
 import { setCurrentCardId } from '../../store/slices/current-card/current-card.tsx';
+import { getOfferRoute } from '../../utils.tsx';
 
 export default function HotelCards() {
   const offers = useAppSelector(getSortedOffers);
@@ -25,7 +26,7 @@ export default function HotelCards() {
             }
           >
             <div className='cities__image-wrapper place-card__image-wrapper'>
-              <Link to={{pathname: `/offer/${offer.id}`}} state={offer}>
+              <Link to={{pathname: getOfferRoute(offer.id)}} state={offer}>
                 <img className="place-card__image" src={offer.previewImage} width="260" height="200" alt="Place image"/>
               </Link>
             </div>

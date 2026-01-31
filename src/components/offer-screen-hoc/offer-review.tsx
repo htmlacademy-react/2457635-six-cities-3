@@ -8,7 +8,7 @@ type OfferReviewProps = {
 
 export default function OfferReview ({currentReview}: OfferReviewProps) {
   const {user:{name, avatarUrl}, comment, date, rating} = currentReview;
-  const ratingValue = rating * RATING_MULTIPLIER;
+  const ratingValue = Math.round(rating) * RATING_MULTIPLIER;
   const convertData = new Date(date);
 
   return (

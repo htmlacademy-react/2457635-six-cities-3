@@ -350,7 +350,7 @@ describe('Async actions', () => {
       mockAxiosAdapter.onPost(`/favorite/${offer.id}/${Number(!offer.isFavorite)}`).reply(200, fakeCurrentOffer);
       mockAxiosAdapter.onGet(ApiRoute.Favorite).reply(200, fakeOffers);
 
-      await store.dispatch(addFavoriteOffer(offer));
+      await store.dispatch(addFavoriteOffer({id: offer.id, isFavorite: offer.isFavorite}));
 
       const emittedActions = store.getActions();
       const extractedActionsTypes = extractActionsTypes(emittedActions);
@@ -372,7 +372,7 @@ describe('Async actions', () => {
       const offer = fakeOffer();
       mockAxiosAdapter.onPost(`/favorite/${offer.id}/${Number(!offer.isFavorite)}`).reply(404, '');
 
-      await store.dispatch(addFavoriteOffer(offer));
+      await store.dispatch(addFavoriteOffer({id: offer.id, isFavorite: offer.isFavorite}));
       const actions = extractActionsTypes(store.getActions());
 
       expect(actions).toEqual([

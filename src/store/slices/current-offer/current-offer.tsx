@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { CurrentOffer, Offers } from '../../../types/models';
 import { getDataCurrentOffer, getNearbyOffers } from '../../api-actions';
 import { NameSpace } from '../../../constants';
-import { setCurrentOfferFavorite } from './actions';
+import { setCurrentOfferFavorite, setNearOfferFavorite } from './actions';
 
 export const currentOffer = createSlice({
   name: NameSpace.CurrentOffer,
@@ -44,6 +44,12 @@ export const currentOffer = createSlice({
       })
       .addCase(setCurrentOfferFavorite, (state, action) => {
         state.currentOffer.isFavorite = action.payload;
+      })
+      .addCase(setNearOfferFavorite, (state, action) => {
+        const target = state.nearOffers.find((offer) => offer.id === action.payload.id);
+        if (target) {
+          target.isFavorite = action.payload.isFavorite;
+        }
       });
   },
 });

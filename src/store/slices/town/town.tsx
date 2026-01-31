@@ -5,7 +5,7 @@ import { City } from '../../../types/models';
 export const town = createSlice({
   name: NameSpace.Town,
   initialState: {
-    currentCity: CITIES[0],
+    currentCity: CITIES[1],
   },
   reducers: {
     changeTown: (state, action: PayloadAction<City>) => {

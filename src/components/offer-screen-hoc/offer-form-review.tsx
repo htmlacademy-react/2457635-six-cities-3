@@ -21,7 +21,7 @@ export default function OfferFormReview ({id}: OfferFormReviewProps) {
   }
 
   const updateButtonState = (nextText: string, nextRating: string) => {
-    if (nextText.length >= LETTER_LENGTH && nextRating) {
+    if (nextText.length >= LETTER_LENGTH && nextText.length <= 300 && nextRating) {
       setIsButtonDisabled(false);
     } else {
       setIsButtonDisabled(true);
@@ -106,7 +106,7 @@ export default function OfferFormReview ({id}: OfferFormReviewProps) {
           </svg>
         </label>
       </div>
-      <textarea className="reviews__textarea form__textarea" id="review" name="review" placeholder="Tell how was your stay, what you like and what can be improved" value={text} onChange={(evt) => changeEnableButton(evt.target.value)} disabled={isSubmitting}></textarea>
+      <textarea className="reviews__textarea form__textarea" id="review" name="review" placeholder="Tell how was your stay, what you like and what can be improved" value={text} onChange={(evt) => changeEnableButton(evt.target.value)} disabled={isSubmitting} maxLength={300}></textarea>
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
                       To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">{LETTER_LENGTH} characters</b>.

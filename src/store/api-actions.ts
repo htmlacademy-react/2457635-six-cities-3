@@ -6,6 +6,7 @@ import { ApiRoute, AppRoute, ErrorMessages } from '../constants';
 import { redirectToRoute } from './action';
 import { dropToken, getToken, saveToken } from '../services/token';
 import { addUserReview } from './slices/review/action';
+import { setNearOfferFavorite } from './slices/current-offer/actions';
 import { dropUserData, setUserData } from './slices/user/actions';
 import { setFavoriteOffers } from './slices/favorite-offers/actions';
 import { removeFavoriteOffers } from './slices/offers/actions';
@@ -157,6 +158,7 @@ export const addFavoriteOffer = createAsyncThunk<CurrentOffer, FavoritePayload, 
     try {
       const {data} = await api.post<CurrentOffer>(`/favorite/${id}/${Number(!isFavorite)}`);
 
+      dispatch(setNearOfferFavorite({id, isFavorite: !isFavorite}));
       await dispatch(getFavoriteOffers());
       return data;
     } catch (error : unknown) {
