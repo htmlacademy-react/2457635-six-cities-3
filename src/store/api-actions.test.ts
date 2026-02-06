@@ -29,7 +29,7 @@ describe('Async actions', () => {
         offers: [] as Offers,
         isOffersLoaded: false,
       },
-      TOWN: { currentCity: CITIES[1] },
+      TOWN: { currentCity: CITIES[0] },
       SORTING: { sorting: SORT_TYPES[0] },
       AUTH: { authStatus: AuthorizationStatus.Unknown },
       USER: { user: {} as UserData },

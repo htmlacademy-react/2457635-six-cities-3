@@ -1,6 +1,8 @@
 import { City, SortTypes } from './types/models';
 
 export const LETTER_LENGTH = 50;
+export const REVIEW_MIN_LENGTH = 50;
+export const REVIEW_MAX_LENGTH = 300;
 
 export const REVIEW_LENGTH = 10;
 
@@ -26,18 +28,18 @@ export const SORT_TYPES: SortTypes[] = [
 
 export const CITIES: City[] = [
   {
-    name: 'Amsterdam',
-    location: {
-      latitude: 52.374,
-      longitude: 4.88969,
-      zoom: 12,
-    },
-  },
-  {
     name: 'Paris',
     location: {
       latitude: 48.8566,
       longitude:  2.3522,
+      zoom: 12,
+    },
+  },
+  {
+    name: 'Amsterdam',
+    location: {
+      latitude: 52.374,
+      longitude: 4.88969,
       zoom: 12,
     },
   },

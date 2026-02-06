@@ -22,7 +22,7 @@ export default function LoginScreen ({authorizationStatus}: LoginScreenProps) {
 
     if (loginRef.current !== null && passwordRef.current !== null) {
       const passwordValue = passwordRef.current.value;
-      const passwordValid = /^(?=.*[A-Za-z])(?=.*\d).+$/.test(passwordValue);
+      const passwordValid = passwordValue.trim().length > 0;
       if (!passwordValid) {
         return;
       }
@@ -62,7 +62,7 @@ export default function LoginScreen ({authorizationStatus}: LoginScreenProps) {
               </div>
               <div className="login__input-wrapper form__input-wrapper">
                 <label className="visually-hidden">Password</label>
-                <input ref={passwordRef} className="login__input form__input" type="password" name="password" placeholder="Password" required data-testid='password-container' pattern="(?=.*[A-Za-z])(?=.*\\d).+"/>
+                <input ref={passwordRef} className="login__input form__input" type="password" name="password" placeholder="Password" required data-testid='password-container'/>
               </div>
               <button className="login__submit form__submit button" type="submit">Sign in</button>
             </form>

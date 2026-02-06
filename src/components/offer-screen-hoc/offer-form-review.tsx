@@ -3,7 +3,7 @@ import { sendUserReview } from '../../store/api-actions';
 import { CurrentOfferId } from '../../types/models';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { getCurrentAuth } from '../../store/slices/auth/selectors';
-import { AuthorizationStatus, LETTER_LENGTH } from '../../constants';
+import { AuthorizationStatus, REVIEW_MAX_LENGTH, REVIEW_MIN_LENGTH } from '../../constants';
 
 type OfferFormReviewProps = {
   id: CurrentOfferId;
@@ -21,7 +21,7 @@ export default function OfferFormReview ({id}: OfferFormReviewProps) {
   }
 
   const updateButtonState = (nextText: string, nextRating: string) => {
-    if (nextText.length >= LETTER_LENGTH && nextText.length <= 300 && nextRating) {
+    if (nextText.length >= REVIEW_MIN_LENGTH && nextText.length <= REVIEW_MAX_LENGTH && nextRating) {
       setIsButtonDisabled(false);
     } else {
       setIsButtonDisabled(true);
@@ -106,10 +106,10 @@ export default function OfferFormReview ({id}: OfferFormReviewProps) {
           </svg>
         </label>
       </div>
-      <textarea className="reviews__textarea form__textarea" id="review" name="review" placeholder="Tell how was your stay, what you like and what can be improved" value={text} onChange={(evt) => changeEnableButton(evt.target.value)} disabled={isSubmitting} maxLength={300}></textarea>
+      <textarea className="reviews__textarea form__textarea" id="review" name="review" placeholder="Tell how was your stay, what you like and what can be improved" value={text} onChange={(evt) => changeEnableButton(evt.target.value)} disabled={isSubmitting} maxLength={REVIEW_MAX_LENGTH}></textarea>
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
-                      To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">{LETTER_LENGTH} characters</b>.
+                      To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">{REVIEW_MIN_LENGTH} characters</b>.
         </p>
         <button className="reviews__submit form__submit button" type="submit" disabled={isButtonDisabled || isSubmitting}>Submit</button>
       </div>
